@@ -33,6 +33,10 @@
     ".": {
       "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
+    },
+    "./ActionButton": {
+      "import": "./dist/components/ActionButton.js",
+      "types": "./dist/components/ActionButton.d.ts"
     }
   },
   "files": [
