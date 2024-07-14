@@ -50,6 +50,10 @@
       "import": "./dist/components/form/index.js",
       "types": "./dist/components/form.index.d.ts"
     },
+    "./form/FormWithState": {
+      "import": "./dist/components/form/FormWithState.js",
+      "types": "./dist/components/form/FormWithState.d.ts"
+    },
     "./form/Group": {
       "import": "./dist/components/form/Group.js",
       "types": "./dist/components/form/Group.d.ts"
