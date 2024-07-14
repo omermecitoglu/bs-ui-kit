@@ -1,0 +1,61 @@
+{
+  "name": "@omer-x/bs-ui-kit",
+  "version": "0.1.0",
+  "description": "Bootstrap UI Kit for React.js",
+  "keywords": [
+    "react",
+    "bootstrap",
+    "ui-kit",
+    "font-awesome"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/omermecitoglu/bs-ui-kit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/omermecitoglu/bs-ui-kit/issues"
+  },
+  "homepage": "https://github.com/omermecitoglu/bs-ui-kit#readme",
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": {
+    "name": "Omer Mecitoglu",
+    "email": "omer.mecitoglu@gmail.com",
+    "url": "https://omermecitoglu.github.io"
+  },
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "build": "tsc"
+  },
+  "peerDependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.5.2",
+    "@fortawesome/free-brands-svg-icons": "^6.5.2",
+    "@fortawesome/free-solid-svg-icons": "^6.5.2",
+    "@fortawesome/react-fontawesome": "^0.2.2",
+    "react-bootstrap": "^2.10.4"
+  },
+  "dependencies": {
+    "classnames": "^2.5.1"
+  },
+  "devDependencies": {
+    "@omer-x/eslint-config": "^1.0.7",
+    "@types/react-dom": "^18.3.0",
+    "eslint": "^8.57.0",
+    "react-dom": "^18.3.1",
+    "typescript": "^5.5.3"
+  }
+}
