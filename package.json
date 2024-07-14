@@ -37,6 +37,10 @@
     "./ActionButton": {
       "import": "./dist/components/ActionButton.js",
       "types": "./dist/components/ActionButton.d.ts"
+    },
+    "./LinkButton": {
+      "import": "./dist/components/LinkButton.js",
+      "types": "./dist/components/LinkButton.d.ts"
     }
   },
   "files": [
