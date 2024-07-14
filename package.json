@@ -57,6 +57,10 @@
     "./form/Group": {
       "import": "./dist/components/form/Group.js",
       "types": "./dist/components/form/Group.d.ts"
+    },
+    "./form/Label": {
+      "import": "./dist/components/form/Label.js",
+      "types": "./dist/components/form/Label.d.ts"
     }
   },
   "files": [
