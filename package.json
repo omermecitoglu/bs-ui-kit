@@ -62,6 +62,10 @@
       "import": "./dist/components/form/Label.js",
       "types": "./dist/components/form/Label.d.ts"
     },
+    "./form/Select": {
+      "import": "./dist/components/form/Select.js",
+      "types": "./dist/components/form/Select.d.ts"
+    },
     "./form/SubmitButton": {
       "import": "./dist/components/form/SubmitButton.js",
       "types": "./dist/components/form/SubmitButton.d.ts"
