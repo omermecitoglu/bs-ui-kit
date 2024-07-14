@@ -38,6 +38,10 @@
       "import": "./dist/components/ActionButton.js",
       "types": "./dist/components/ActionButton.d.ts"
     },
+    "./CreateButton": {
+      "import": "./dist/components/CreateButton.js",
+      "types": "./dist/components/CreateButton.d.ts"
+    },
     "./LinkButton": {
       "import": "./dist/components/LinkButton.js",
       "types": "./dist/components/LinkButton.d.ts"
