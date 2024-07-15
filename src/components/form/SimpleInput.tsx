@@ -9,9 +9,9 @@ type SimpleInputProps = {
 const SimpleInput = (props: InputProps & SimpleInputProps) => (
   <>
     {props.lines ? (
-      <FormControl as="textarea" rows={props.lines} {...omit(props, "label", "children", "feedback")} />
+      <FormControl as="textarea" rows={props.lines} {...omit(props, "label", "children", "feedback", "messages")} />
     ) : (
-      <FormControl as="input" {...omit(props, "label", "children", "feedback")} />
+      <FormControl as="input" {...omit(props, "label", "children", "feedback", "messages")} />
     )}
   </>
 );

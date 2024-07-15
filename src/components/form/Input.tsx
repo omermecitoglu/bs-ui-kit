@@ -18,6 +18,7 @@ export type InputProps = {
   autoFocus?: boolean,
   readOnly?: boolean,
   feedback?: boolean,
+  messages?: Record<string, string | undefined>,
   children?: ReactNode,
 };
 

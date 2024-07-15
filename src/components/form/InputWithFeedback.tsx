@@ -16,7 +16,7 @@ const InputWithFeedback = (props: InputProps) => {
       />
       {inputError && (
         <Feedback type="invalid">
-          {messages[inputError] ?? inputError}
+          {(props.messages ? props.messages[inputError] : null) ?? messages[inputError] ?? inputError}
         </Feedback>
       )}
     </>
