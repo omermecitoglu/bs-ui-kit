@@ -6,16 +6,17 @@ import SimpleInput from "./SimpleInput";
 import type { InputProps } from "./Input";
 
 const InputWithFeedback = (props: InputProps) => {
-  const errors = useContext(FormContext);
+  const { errors, messages } = useContext(FormContext);
+  const inputError = errors[props.name];
   return (
     <>
       <SimpleInput
         {...props}
-        isInvalid={!!errors[props.name]}
+        isInvalid={!!inputError}
       />
-      {errors[props.name] && (
+      {inputError && (
         <Feedback type="invalid">
-          {errors[props.name]}
+          {messages[inputError] ?? inputError}
         </Feedback>
       )}
     </>

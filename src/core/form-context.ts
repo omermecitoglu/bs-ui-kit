@@ -1,7 +1,13 @@
 import { createContext } from "react";
 
-type FormErrors = Record<string, string>;
+type Context = {
+  errors: Record<string, string>,
+  messages: Record<string, string | undefined>,
+};
 
-const FormContext = createContext<FormErrors>({});
+const FormContext = createContext<Context>({
+  errors: {},
+  messages: {},
+});
 
 export default FormContext;

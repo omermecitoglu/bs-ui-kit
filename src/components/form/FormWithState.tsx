@@ -22,27 +22,38 @@ const FormWithState = ({
   children,
 }: FormWithStateProps) => {
   const [show, setShow] = useState(true);
-  const [formState, formAction] = useFormState(action, null);
+  const [formState, formAction] = useFormState(action, {});
   useEffect(() => setShow(true), [formState]);
   const dismiss = () => setShow(false);
 
   return (
     <>
-      {show && formState && formState.success && (
-        <Alert variant="success" onClose={dismiss} dismissible>{messages[formState.success] ?? formState.success}</Alert>
+      {show && formState["[success]"] && (
+        <Alert variant="success" onClose={dismiss} dismissible>
+          {messages[formState["[success]"]] ?? formState["[success]"]}
+        </Alert>
       )}
-      {show && formState && formState.danger && (
-        <Alert variant="danger" onClose={dismiss} dismissible>{messages[formState.danger] ?? formState.danger}</Alert>
+      {show && formState["[danger]"] && (
+        <Alert variant="danger" onClose={dismiss} dismissible>
+          {messages[formState["[danger]"]] ?? formState["[danger]"]}
+        </Alert>
       )}
-      {show && formState && formState.warning && (
-        <Alert variant="warning" onClose={dismiss} dismissible>{messages[formState.warning] ?? formState.warning}</Alert>
+      {show && formState["[warning]"] && (
+        <Alert variant="warning" onClose={dismiss} dismissible>
+          {messages[formState["[warning]"]] ?? formState["[warning]"]}
+        </Alert>
       )}
-      {show && formState && formState.info && (
-        <Alert variant="info" onClose={dismiss} dismissible>{messages[formState.info] ?? formState.info}</Alert>
+      {show && formState["[info]"] && (
+        <Alert variant="info" onClose={dismiss} dismissible>
+          {messages[formState["[info]"]] ?? formState["[info]"]}
+        </Alert>
       )}
-      <FormContext.Provider value={formState ?? {}}>
-        {hideAfterPost && formState?.success ? false : (
-          <Form action={formAction as unknown as string} className={classNames("d-flex flex-column gap-3", className)}>
+      <FormContext.Provider value={{ errors: formState, messages }}>
+        {hideAfterPost && formState["[success]"] ? false : (
+          <Form
+            action={formAction as unknown as string}
+            className={classNames("d-flex flex-column gap-3", className)}
+          >
             {children}
           </Form>
         )}
