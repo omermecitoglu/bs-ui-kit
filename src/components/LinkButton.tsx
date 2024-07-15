@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames";
+import ActionButton from "./ActionButton";
 import type { IconProp } from "@fortawesome/fontawesome-svg-core";
 import type { ReactNode } from "react";
 import type { ButtonVariant } from "react-bootstrap/types";
@@ -8,9 +9,11 @@ type LinkButtonProps = {
   as: (props: { href: string, className: string, children: ReactNode }) => JSX.Element,
   variant?: ButtonVariant,
   size?: "lg" | "sm",
-  icon: IconProp,
+  icon?: IconProp,
   href: string,
   text?: string,
+  disabled?: boolean,
+  stretched?: boolean,
 };
 
 const LinkButton = ({
@@ -20,19 +23,36 @@ const LinkButton = ({
   icon,
   href,
   text,
+  disabled = false,
+  stretched = false,
 }: LinkButtonProps) => (
-  <Link
-    href={href}
-    className={classNames("btn", `btn-${variant}`, {
-      "btn-sm": size === "sm",
-      "btn-lg": size === "lg",
-    })}
-  >
-    <FontAwesomeIcon size="lg" icon={icon} className="fa-fw" />
-    {text && (
-      <span className="mx-2">{text}</span>
-    )}
-  </Link>
+  disabled ? (
+    <ActionButton
+      variant={variant}
+      size={size}
+      icon={icon}
+      text={text}
+      disabled={disabled}
+      stretched={stretched}
+    />
+  ) : (
+    <Link
+      href={href}
+      className={classNames("btn", `btn-${variant}`, {
+        "btn-sm": size === "sm",
+        "btn-lg": size === "lg",
+      })}
+    >
+      {icon && (
+        <FontAwesomeIcon size="lg" icon={icon} className="fa-fw" />
+      )}
+      {text && (
+        <span className={icon ? classNames("ms-2", stretched ? "me-4" : "me-2") : undefined}>
+          {text}
+        </span>
+      )}
+    </Link>
+  )
 );
 
 export default LinkButton;
