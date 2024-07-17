@@ -46,6 +46,10 @@
       "import": "./dist/components/LinkButton.js",
       "types": "./dist/components/LinkButton.d.ts"
     },
+    "./LongColumn": {
+      "import": "./dist/components/LongColumn.js",
+      "types": "./dist/components/LongColumn.d.ts"
+    },
     "./form": {
       "import": "./dist/components/form/index.js",
       "types": "./dist/components/form.index.d.ts"
