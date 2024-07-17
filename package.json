@@ -1,6 +1,6 @@
 {
   "name": "@omer-x/bs-ui-kit",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Bootstrap UI Kit for React.js",
   "keywords": [
     "react",
@@ -92,7 +92,8 @@
   ],
   "scripts": {
     "dev": "tsc --watch",
-    "build": "tsc"
+    "build": "tsc",
+    "postbuild": "copyfiles -f src/styles/* dist/styles && echo 'CSS files copied.'"
   },
   "peerDependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
@@ -107,6 +108,7 @@
   "devDependencies": {
     "@omer-x/eslint-config": "^1.0.7",
     "@types/react-dom": "^18.3.0",
+    "copyfiles": "^2.4.1",
     "eslint": "^8.57.0",
     "react-dom": "^18.3.1",
     "typescript": "^5.5.3"
