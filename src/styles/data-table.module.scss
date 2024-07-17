@@ -1,0 +1,10 @@
+table.moderation {
+  & td {
+    vertical-align: middle;
+  }
+
+  & td.operations {
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+}

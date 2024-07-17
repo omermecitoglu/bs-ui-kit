@@ -46,6 +46,10 @@
       "import": "./dist/components/LinkButton.js",
       "types": "./dist/components/LinkButton.d.ts"
     },
+    "./DataTable": {
+      "import": "./dist/components/DataTable.js",
+      "types": "./dist/components/DataTable.d.ts"
+    },
     "./LongColumn": {
       "import": "./dist/components/LongColumn.js",
       "types": "./dist/components/LongColumn.d.ts"
