@@ -7,21 +7,23 @@ import LinkButton from "./LinkButton";
 import LongColumn from "./LongColumn";
 import type { ReactNode } from "react";
 
-type Column<T, Value extends keyof T, PK extends keyof T> = {
+type Column<CI, K extends keyof CI, PK extends keyof CI> = {
   header: string,
   size?: "sm" | "md",
-  wrapper?: (value: T[Value], primaryKey?: T[PK]) => ReactNode,
+  wrapper?: (value: CI[K], primaryKey: CI[PK]) => ReactNode,
   long?: boolean,
 };
 
-type DataTableProps<T, K extends keyof T, PK extends keyof T> = {
+export type DataTableProps<CI, K extends keyof CI, PK extends keyof CI> = {
   link: (props: { href: string, className: string, children: ReactNode }) => JSX.Element,
-  collection: T[],
+  collection: CI[],
   primaryKey: PK,
-  schema: Record<K, Column<T, K, PK>>,
-  editLink?: (primaryKey: T[PK]) => string,
+  schema: {
+    [CIK in K]: Column<CI, CIK, PK>;
+  },
+  editLink?: (primaryKey: CI[PK]) => string,
 } & ({
-  destroyAction: (primaryKey: T[PK], formData: FormData) => void,
+  destroyAction: (primaryKey: CI[PK], formData: FormData) => void,
   destroyWarningTitle: string,
   destroyWarningDescription: string,
   destroyConfirmText: string,
@@ -34,29 +36,29 @@ type DataTableProps<T, K extends keyof T, PK extends keyof T> = {
   destroyCancelText?: undefined,
 });
 
-const DataTable = <T extends Record<string, string | number>, K extends keyof T, PK extends keyof T>({
+const DataTable = <CI extends Record<string, unknown>, K extends keyof CI, PK extends keyof CI>({
   link: Link,
   collection,
   primaryKey,
+  schema,
   editLink,
   destroyAction,
   destroyWarningTitle,
   destroyWarningDescription,
   destroyConfirmText,
   destroyCancelText,
-  schema,
-}: DataTableProps<T, K, PK>) => {
-  function cutText<TextType>(text: TextType, length: number) {
+}: DataTableProps<CI, K, PK>) => {
+  function cutText(text: unknown, length: number): string {
     if (typeof text === "string") {
-      return `${text.slice(0, length)}${text.length > length ? "..." : ""}` as TextType;
+      return `${text.slice(0, length)}${text.length > length ? "..." : ""}`;
     }
-    return text;
+    return text as string;
   }
   return (
     <Table striped hover className={styles.table}>
       <thead className="text-nowrap">
         <tr>
-          {Object.entries<Column<T, K, PK>>(schema).map(([key, column]) => (
+          {Object.entries<Column<CI, K, PK>>(schema as unknown as ArrayLike<Column<CI, K, PK>>).map(([key, column]) => (
             <th
               key={key}
               className={classNames({
@@ -73,8 +75,8 @@ const DataTable = <T extends Record<string, string | number>, K extends keyof T,
       </thead>
       <tbody className="text-nowrap">
         {collection.map(collectionItem => (
-          <tr key={collectionItem[primaryKey]}>
-            {Object.entries<Column<T, K, PK>>(schema).map(([key, column]) => (
+          <tr key={collectionItem[primaryKey] as string}>
+            {Object.entries<Column<CI, K, PK>>(schema as unknown as ArrayLike<Column<CI, K, PK>>).map(([key, column]) => (
               <LongColumn
                 key={key}
                 className={classNames({
@@ -85,7 +87,7 @@ const DataTable = <T extends Record<string, string | number>, K extends keyof T,
                 disabled={!column.long}
               >
                 {column.wrapper
-                  ? column.wrapper(cutText(collectionItem[key as K], 120), collectionItem[primaryKey])
+                  ? column.wrapper(cutText(collectionItem[key], 120) as CI[K], collectionItem[primaryKey])
                   : cutText(collectionItem[key], 120)}
               </LongColumn>
             ))}
