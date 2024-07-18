@@ -10,7 +10,7 @@ import type { ReactNode } from "react";
 type Column<CI, K extends keyof CI, PK extends keyof CI> = {
   header: string,
   size?: "sm" | "md",
-  wrapper?: (value: CI[K], primaryKey: CI[PK]) => ReactNode,
+  wrapper?: (value: CI[K], primaryKey: CI[PK], item: CI) => ReactNode,
   long?: boolean,
 };
 
@@ -87,7 +87,11 @@ const DataTable = <CI extends Record<string, unknown>, K extends keyof CI, PK ex
                 disabled={!column.long}
               >
                 {column.wrapper
-                  ? column.wrapper(cutText(collectionItem[key], 120) as CI[K], collectionItem[primaryKey])
+                  ? column.wrapper(
+                    cutText(collectionItem[key], 120) as CI[K],
+                    collectionItem[primaryKey],
+                    collectionItem,
+                  )
                   : cutText(collectionItem[key], 120)}
               </LongColumn>
             ))}
