@@ -6,7 +6,7 @@ type SelectProps<Option> = {
   label: string,
   name: string,
   options: Option[],
-  optionName?: (option: string) => string,
+  optionName?: (option: Option) => string,
   defaultValue?: NoInfer<Option>,
   value?: NoInfer<Option>,
   onChange?: (value: NoInfer<Option>) => void,
