@@ -3,7 +3,7 @@ import styles from "../styles/ellipsis.module.css";
 import type { ReactNode } from "react";
 
 type LongColumnProps = {
-  className: string,
+  className?: string,
   disabled?: boolean,
   children: ReactNode,
 };
