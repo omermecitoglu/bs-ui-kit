@@ -1,6 +1,6 @@
 {
   "name": "@omer-x/bs-ui-kit",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Bootstrap UI Kit for React.js",
   "keywords": [
     "react",
@@ -67,8 +67,8 @@
       "types": "./dist/components/form/Group.d.ts"
     },
     "./form/GroupedAdvancedSelect": {
-      "import": "./dist/components/form/GroupedAdvancedSelect.js",
-      "types": "./dist/components/form/GroupedAdvancedSelect.d.ts"
+      "import": "./dist/components/form/GroupedAdvancedSelect/index.js",
+      "types": "./dist/components/form/GroupedAdvancedSelect/index.d.ts"
     },
     "./form/Input": {
       "import": "./dist/components/form/Input.js",
