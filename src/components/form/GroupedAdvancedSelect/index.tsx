@@ -15,6 +15,7 @@ type GroupedAdvancedSelectProps<OT, VK, LK, GK> = {
   labelKey: LK,
   groupKey: GK,
   groupNames?: Record<string, string>,
+  emptyLabel: string,
   multiple?: boolean,
   defaultValue?: string[] | string,
 };
@@ -32,6 +33,7 @@ const GroupedAdvancedSelect = <
   labelKey,
   groupKey,
   groupNames = {},
+  emptyLabel,
   multiple = false,
   defaultValue,
 }: GroupedAdvancedSelectProps<OT, VK, LK, GK>) => {
@@ -58,7 +60,7 @@ const GroupedAdvancedSelect = <
         renderMenu={menu(labelKey, groupKey, groupNames)}
         defaultSelected={initialSelected as unknown as TypeaheadComponentProps["defaultSelected"]}
         clearButton
-        emptyLabel="No matches found."
+        emptyLabel={emptyLabel}
         // minLength={1}
         highlightOnlyResult
         paginate={false}
