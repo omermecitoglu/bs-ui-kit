@@ -28,12 +28,14 @@ export type DataTableProps<CI, K extends keyof CI, PK extends keyof CI> = {
   destroyWarningDescription: string,
   destroyConfirmText: string,
   destroyCancelText: string,
+  destroyDisabled: boolean | ((primaryKey: CI[PK]) => boolean),
 } | {
   destroyAction?: undefined,
   destroyWarningTitle?: undefined,
   destroyWarningDescription?: undefined,
   destroyConfirmText?: undefined,
   destroyCancelText?: undefined,
+  destroyDisabled?: undefined,
 });
 
 const DataTable = <CI extends Record<string, unknown>, K extends keyof CI, PK extends keyof CI>({
@@ -47,6 +49,7 @@ const DataTable = <CI extends Record<string, unknown>, K extends keyof CI, PK ex
   destroyWarningDescription,
   destroyConfirmText,
   destroyCancelText,
+  destroyDisabled = false,
 }: DataTableProps<CI, K, PK>) => {
   function cutText(text: unknown, length: number): string {
     if (typeof text === "string") {
@@ -74,8 +77,8 @@ const DataTable = <CI extends Record<string, unknown>, K extends keyof CI, PK ex
         </tr>
       </thead>
       <tbody className="text-nowrap">
-        {collection.map(collectionItem => (
-          <tr key={collectionItem[primaryKey] as string}>
+        {collection.map(item => (
+          <tr key={item[primaryKey] as string}>
             {Object.entries<Column<CI, K, PK>>(schema as unknown as ArrayLike<Column<CI, K, PK>>).map(([key, column]) => (
               <LongColumn
                 key={key}
@@ -88,11 +91,11 @@ const DataTable = <CI extends Record<string, unknown>, K extends keyof CI, PK ex
               >
                 {column.wrapper
                   ? column.wrapper(
-                    cutText(collectionItem[key], 120) as CI[K],
-                    collectionItem[primaryKey],
-                    collectionItem,
+                    cutText(item[key], 120) as CI[K],
+                    item[primaryKey],
+                    item,
                   )
-                  : cutText(collectionItem[key], 120)}
+                  : cutText(item[key], 120)}
               </LongColumn>
             ))}
             <td className={styles.actions}>
@@ -102,7 +105,7 @@ const DataTable = <CI extends Record<string, unknown>, K extends keyof CI, PK ex
                     as={Link}
                     variant="outline-secondary"
                     icon={faPencil}
-                    href={editLink(collectionItem[primaryKey])}
+                    href={editLink(item[primaryKey])}
                     size="sm"
                   />
                 )}
@@ -110,9 +113,10 @@ const DataTable = <CI extends Record<string, unknown>, K extends keyof CI, PK ex
                   <DeleteButton
                     title={destroyWarningTitle}
                     description={destroyWarningDescription}
-                    action={destroyAction.bind(null, collectionItem[primaryKey])}
+                    action={destroyAction.bind(null, item[primaryKey])}
                     confirmText={destroyConfirmText}
                     cancelText={destroyCancelText}
+                    disabled={typeof destroyDisabled === "function" ? destroyDisabled(item[primaryKey]) : destroyDisabled}
                   />
                 )}
               </div>
