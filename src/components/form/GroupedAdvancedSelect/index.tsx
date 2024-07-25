@@ -1,11 +1,12 @@
 "use client";
 import "react-bootstrap-typeahead/css/Typeahead.css";
 import "react-bootstrap-typeahead/css/Typeahead.bs5.css";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Typeahead, type TypeaheadComponentProps } from "react-bootstrap-typeahead";
 import Group from "../Group";
 import Label from "../Label";
 import menu from "./menu";
+import type TypeaheadCore from "react-bootstrap-typeahead/types/core/Typeahead";
 
 type GroupedAdvancedSelectProps<OT, VK, LK, GK> = {
   label: string,
@@ -17,6 +18,7 @@ type GroupedAdvancedSelectProps<OT, VK, LK, GK> = {
   groupNames?: Record<string, string>,
   emptyLabel: string,
   multiple?: boolean,
+  required?: boolean,
   defaultValue?: string[] | string,
 };
 
@@ -35,8 +37,10 @@ const GroupedAdvancedSelect = <
   groupNames = {},
   emptyLabel,
   multiple = false,
+  required = false,
   defaultValue,
 }: GroupedAdvancedSelectProps<OT, VK, LK, GK>) => {
+  const typeahead = useRef<TypeaheadCore>(null);
   const initialSelected = options.filter(o => {
     return Array.isArray(defaultValue) ? defaultValue.includes(o[valueKey] as string) : o[valueKey] === defaultValue;
   });
@@ -53,6 +57,13 @@ const GroupedAdvancedSelect = <
         <input key={index} type="hidden" name={multiple ? `${name}[]` : name} value={option[valueKey] as string} />
       ))}
       <Typeahead
+        ref={typeahead}
+        onBlur={() => {
+          if (typeahead.current && !selected.length && !multiple) {
+            typeahead.current.clear();
+          }
+        }}
+        inputProps={{ required }}
         multiple={multiple}
         onChange={handleChange as unknown as TypeaheadComponentProps["onChange"]}
         options={options}
