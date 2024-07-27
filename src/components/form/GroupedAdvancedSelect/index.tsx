@@ -1,12 +1,17 @@
 "use client";
 import "react-bootstrap-typeahead/css/Typeahead.css";
 import "react-bootstrap-typeahead/css/Typeahead.bs5.css";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Typeahead, type TypeaheadComponentProps } from "react-bootstrap-typeahead";
 import Group from "../Group";
 import Label from "../Label";
 import menu from "./menu";
 import type TypeaheadCore from "react-bootstrap-typeahead/types/core/Typeahead";
+
+type ValueProps<T> = {
+  onChange?: (value: T) => void,
+  defaultValue?: T,
+};
 
 type GroupedAdvancedSelectProps<OT, VK, LK, GK> = {
   label: string,
@@ -17,10 +22,12 @@ type GroupedAdvancedSelectProps<OT, VK, LK, GK> = {
   groupKey: GK,
   groupNames?: Record<string, string>,
   emptyLabel: string,
-  multiple?: boolean,
   required?: boolean,
-  defaultValue?: string[] | string,
-};
+} & (
+  ({ multiple: true } & ValueProps<string[]>)
+  |
+  ({ multiple?: false } & ValueProps<string | undefined>)
+);
 
 const GroupedAdvancedSelect = <
   OT extends Record<string, unknown>,
@@ -36,15 +43,23 @@ const GroupedAdvancedSelect = <
   groupKey,
   groupNames = {},
   emptyLabel,
-  multiple = false,
   required = false,
-  defaultValue,
+  ...props
 }: GroupedAdvancedSelectProps<OT, VK, LK, GK>) => {
-  const typeahead = useRef<TypeaheadCore>(null);
-  const initialSelected = options.filter(o => {
-    return Array.isArray(defaultValue) ? defaultValue.includes(o[valueKey] as string) : o[valueKey] === defaultValue;
-  });
+  const initialValue = props.defaultValue;
+  const initialArray = Array.isArray(initialValue) ? initialValue : (initialValue ? [initialValue] : []);
+  const initialSelected = options.filter(o => initialArray.includes(o[valueKey] as string));
   const [selected, setSelected] = useState<OT[]>(initialSelected);
+  const typeahead = useRef<TypeaheadCore>(null);
+
+  useEffect(() => {
+    if (!props.onChange) return;
+    if (props.multiple) {
+      props.onChange(selected.map(s => s[valueKey] as string));
+    } else {
+      props.onChange(selected.length ? selected[0][valueKey] as string : undefined);
+    }
+  }, [selected]);
 
   const handleChange = (selectedOptions: OT[]) => {
     setSelected(selectedOptions);
@@ -54,22 +69,22 @@ const GroupedAdvancedSelect = <
     <Group id={name}>
       <Label text={label} />
       {selected.map((option, index) => (
-        <input key={index} type="hidden" name={multiple ? `${name}[]` : name} value={option[valueKey] as string} />
+        <input key={index} type="hidden" name={props.multiple ? `${name}[]` : name} value={option[valueKey] as string} />
       ))}
       <Typeahead
         ref={typeahead}
         onBlur={() => {
-          if (typeahead.current && !selected.length && !multiple) {
+          if (typeahead.current && !selected.length && !props.multiple) {
             typeahead.current.clear();
           }
         }}
         inputProps={{ required }}
-        multiple={multiple}
+        multiple={props.multiple ?? false}
+        selected={selected}
         onChange={handleChange as unknown as TypeaheadComponentProps["onChange"]}
         options={options}
         labelKey={labelKey}
         renderMenu={menu(labelKey, groupKey, groupNames)}
-        defaultSelected={initialSelected as unknown as TypeaheadComponentProps["defaultSelected"]}
         clearButton
         emptyLabel={emptyLabel}
         // minLength={1}
