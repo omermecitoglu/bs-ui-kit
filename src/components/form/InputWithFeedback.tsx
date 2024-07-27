@@ -2,21 +2,29 @@
 import { useContext } from "react";
 import Feedback from "react-bootstrap/Feedback";
 import FormContext from "../../core/form-context";
-import SimpleInput from "./SimpleInput";
-import type { InputProps } from "./Input";
+import SimpleInput, { type HtmlInputProps } from "./SimpleInput";
 
-const InputWithFeedback = (props: InputProps) => {
-  const { errors, messages } = useContext(FormContext);
-  const inputError = errors[props.name];
+export type InputWithFeedbackProps = {
+  messages?: Record<string, string | undefined>,
+};
+
+const InputWithFeedback = ({
+  messages,
+  name,
+  ...props
+}: HtmlInputProps & InputWithFeedbackProps) => {
+  const context = useContext(FormContext);
+  const inputError = context.errors[name];
   return (
     <>
       <SimpleInput
         {...props}
+        name={name}
         isInvalid={!!inputError}
       />
       {inputError && (
         <Feedback type="invalid">
-          {(props.messages ? props.messages[inputError] : null) ?? messages[inputError] ?? inputError}
+          {(messages ? messages[inputError] : null) ?? context.messages[inputError] ?? inputError}
         </Feedback>
       )}
     </>

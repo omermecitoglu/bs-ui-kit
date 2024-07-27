@@ -1,35 +1,33 @@
 import Group from "./Group";
-import InputWithFeedback from "./InputWithFeedback";
+import InputWithFeedback, { type InputWithFeedbackProps } from "./InputWithFeedback";
 import Label from "./Label";
-import SimpleInput from "./SimpleInput";
+import SimpleInput, { type HtmlInputProps } from "./SimpleInput";
 import type { ReactNode } from "react";
 
 export type InputProps = {
   label: string,
-  type?: "text" | "email" | "password" | "number",
-  name: string,
-  autoComplete?: "username" | "name" | "email" | "current-password" | "new-password" | "off",
-  lines?: number,
-  placeholder?: string,
-  defaultValue?: string,
-  value?: string,
-  onChange?: React.ChangeEventHandler<HTMLInputElement>,
-  required?: boolean,
-  autoFocus?: boolean,
-  readOnly?: boolean,
+  /**
+   * @deprecated This prop is deprecated and will be removed in future versions.
+   */
   feedback?: boolean,
-  messages?: Record<string, string | undefined>,
   children?: ReactNode,
 };
 
-const Input = (props: InputProps) => (
-  <Group id={props.name}>
-    <Label text={props.label} />
-    {props.children}
-    {props.feedback ? (
-      <InputWithFeedback {...props} />
+const Input = ({
+  name,
+  label,
+  feedback,
+  messages,
+  children,
+  ...props
+}: InputProps & HtmlInputProps & InputWithFeedbackProps) => (
+  <Group id={name}>
+    <Label text={label} />
+    {children}
+    {(!!feedback || !!messages) ? (
+      <InputWithFeedback name={name} messages={messages} {...props} />
     ) : (
-      <SimpleInput {...props} />
+      <SimpleInput name={name} {...props} />
     )}
   </Group>
 );

@@ -1,17 +1,40 @@
 import FormControl from "react-bootstrap/FormControl";
-import { omit } from "../../utils/object";
-import type { InputProps } from "./Input";
+
+export type HtmlInputProps = {
+  name: string,
+  autoComplete?: "username" | "name" | "email" | "current-password" | "new-password" | "off",
+  lines?: number,
+  placeholder?: string,
+  required?: boolean,
+  autoFocus?: boolean,
+  readOnly?: boolean,
+} & ({
+  type?: "text" | "email" | "password",
+} | {
+  type: "number",
+  min?: number,
+  max?: number,
+}) & ({
+  value: string,
+  onChange?: React.ChangeEventHandler<HTMLInputElement>,
+} | {
+  defaultValue?: string,
+});
 
 type SimpleInputProps = {
   isInvalid?: boolean,
 };
 
-const SimpleInput = (props: InputProps & SimpleInputProps) => (
+const SimpleInput = ({
+  type = "text",
+  lines,
+  ...props
+}: HtmlInputProps & SimpleInputProps) => (
   <>
-    {props.lines ? (
-      <FormControl as="textarea" rows={props.lines} {...omit(props, "label", "children", "feedback", "messages")} />
+    {lines ? (
+      <FormControl type={type} {...props} as="textarea" rows={lines} />
     ) : (
-      <FormControl as="input" {...omit(props, "label", "children", "feedback", "messages")} />
+      <FormControl type={type} {...props} as="input" />
     )}
   </>
 );
