@@ -1,8 +1,10 @@
 "use client";
 import "react-bootstrap-typeahead/css/Typeahead.css";
 import "react-bootstrap-typeahead/css/Typeahead.bs5.css";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
+import Feedback from "react-bootstrap/Feedback";
 import { Typeahead, type TypeaheadComponentProps } from "react-bootstrap-typeahead";
+import FormContext from "../../../core/form-context";
 import Group from "../Group";
 import Label from "../Label";
 import menu from "./menu";
@@ -23,6 +25,7 @@ type GroupedAdvancedSelectProps<OT, VK, LK, GK> = {
   groupNames?: Record<string, string>,
   emptyLabel: string,
   required?: boolean,
+  messages?: Record<string, string | undefined>,
 } & (
   ({ multiple: true } & ValueProps<string[]>)
   |
@@ -44,6 +47,7 @@ const GroupedAdvancedSelect = <
   groupNames = {},
   emptyLabel,
   required = false,
+  messages,
   ...props
 }: GroupedAdvancedSelectProps<OT, VK, LK, GK>) => {
   const initialValue = props.defaultValue;
@@ -51,6 +55,8 @@ const GroupedAdvancedSelect = <
   const initialSelected = options.filter(o => initialArray.includes(o[valueKey] as string));
   const [selected, setSelected] = useState<OT[]>(initialSelected);
   const typeahead = useRef<TypeaheadCore>(null);
+  const context = useContext(FormContext);
+  const inputError = context.errors[name];
 
   useEffect(() => {
     if (!props.onChange) return;
@@ -91,7 +97,13 @@ const GroupedAdvancedSelect = <
         highlightOnlyResult
         paginate={false}
         // maxResults={5}
+        isInvalid={!!inputError}
       />
+      {inputError && (
+        <Feedback type="invalid">
+          {(messages ? messages[inputError] : null) ?? context.messages[inputError] ?? inputError}
+        </Feedback>
+      )}
     </Group>
   );
 };
