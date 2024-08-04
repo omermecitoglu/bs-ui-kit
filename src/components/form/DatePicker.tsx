@@ -11,7 +11,7 @@ type DatePickerProps = {
   name: string,
   label: string,
   language: string,
-  defaultValue: string,
+  defaultValue?: string,
 };
 
 const DatePicker = ({
