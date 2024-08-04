@@ -1,6 +1,6 @@
 "use client";
-import "../../../node_modules/vanillajs-datepicker/dist/css/datepicker.min.css";
-import "../../../node_modules/vanillajs-datepicker/dist/css/datepicker-bs5.min.css";
+import "vanillajs-datepicker/css/datepicker.min.css";
+import "vanillajs-datepicker/css/datepicker-bs5.min.css";
 import { useEffect, useRef } from "react";
 import FormControl from "react-bootstrap/FormControl";
 import VanillaDatepicker from "vanillajs-datepicker/Datepicker";
@@ -11,12 +11,14 @@ type DatePickerProps = {
   name: string,
   label: string,
   language: string,
+  defaultValue: string,
 };
 
 const DatePicker = ({
   name,
   label,
   language,
+  defaultValue,
 }: DatePickerProps) => {
   const input = useRef<HTMLInputElement>(null);
 
@@ -40,7 +42,14 @@ const DatePicker = ({
   return (
     <Group id={name}>
       <Label text={label} />
-      <FormControl ref={input} as="input" type="text" readOnly />
+      <FormControl
+        ref={input}
+        as="input"
+        type="text"
+        name={name}
+        defaultValue={defaultValue}
+        readOnly
+      />
     </Group>
   );
 };
