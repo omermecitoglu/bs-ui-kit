@@ -58,13 +58,13 @@ const DataTable = <CI extends Record<string, unknown>, K extends keyof CI, PK ex
     return text as string;
   }
   return (
-    <Table striped hover className={styles.table}>
+    <Table striped hover className={classNames(styles.table, "mb-0")}>
       <thead className="text-nowrap">
         <tr>
           {Object.entries<Column<CI, K, PK>>(schema as unknown as ArrayLike<Column<CI, K, PK>>).map(([key, column]) => (
             <th
               key={key}
-              className={classNames({
+              className={classNames("pt-0", {
                 "d-none": !!column.size,
                 "d-sm-table-cell": column.size === "sm",
                 "d-md-table-cell": column.size === "md",
