@@ -1,9 +1,9 @@
 import { faPlus } from "@fortawesome/free-solid-svg-icons/faPlus";
 import LinkButton from "./LinkButton";
-import type { ReactNode } from "react";
+import type { LinkProps } from "../types/link";
 
 type CreateButtonProps = {
-  as: (props: { href: string, className: string, children: ReactNode }) => JSX.Element,
+  as: (props: LinkProps) => JSX.Element,
   size?: "lg" | "sm",
   text: string,
   href: string,

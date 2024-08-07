@@ -5,6 +5,7 @@ import styles from "../styles/data-table.module.scss";
 import DeleteButton from "./DeleteButton";
 import LinkButton from "./LinkButton";
 import LongColumn from "./LongColumn";
+import type { LinkProps } from "../types/link";
 import type { ReactNode } from "react";
 
 type Column<CI, K extends keyof CI, PK extends keyof CI> = {
@@ -15,7 +16,7 @@ type Column<CI, K extends keyof CI, PK extends keyof CI> = {
 };
 
 export type DataTableProps<CI, K extends keyof CI, PK extends keyof CI> = {
-  link: (props: { href: string, className: string, children: ReactNode }) => JSX.Element,
+  link: (props: LinkProps) => JSX.Element,
   collection: CI[],
   primaryKey: PK,
   schema: {

@@ -1,12 +1,12 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames";
 import ActionButton from "./ActionButton";
+import type { LinkProps } from "../types/link";
 import type { IconProp } from "@fortawesome/fontawesome-svg-core";
-import type { ReactNode } from "react";
 import type { ButtonVariant } from "react-bootstrap/types";
 
 type LinkButtonProps = {
-  as: (props: { href: string, className: string, children: ReactNode }) => JSX.Element,
+  as: (props: LinkProps) => JSX.Element,
   variant?: ButtonVariant,
   size?: "lg" | "sm",
   icon?: IconProp,
