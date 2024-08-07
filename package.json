@@ -54,9 +54,17 @@
       "import": "./dist/components/LongColumn.js",
       "types": "./dist/components/LongColumn.d.ts"
     },
+    "./auth": {
+      "import": "./dist/components/auth/index.js",
+      "types": "./dist/components/auth/index.d.ts"
+    },
+    "./auth/*": {
+      "import": "./dist/components/auth/*.js",
+      "types": "./dist/components/auth/*.d.ts"
+    },
     "./form": {
       "import": "./dist/components/form/index.js",
-      "types": "./dist/components/form.index.d.ts"
+      "types": "./dist/components/form/index.d.ts"
     },
     "./form/FormWithState": {
       "import": "./dist/components/form/FormWithState.js",
