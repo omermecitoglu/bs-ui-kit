@@ -1,3 +1,4 @@
 export { default as Layout } from "./Layout";
 export { default as LoginForm } from "./LoginForm";
 export { default as RegistrationForm } from "./RegistrationForm";
+export { default as ForgotPassword } from "./ForgotPassword";
