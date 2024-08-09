@@ -74,7 +74,7 @@ const DataTable = <CI extends Record<string, unknown>, K extends keyof CI, PK ex
               {column.header}
             </th>
           ))}
-          <th>&nbsp;</th>
+          <th className="pt-0">&nbsp;</th>
         </tr>
       </thead>
       <tbody className="text-nowrap">
