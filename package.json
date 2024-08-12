@@ -1,6 +1,6 @@
 {
   "name": "@omer-x/bs-ui-kit",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "description": "Bootstrap UI Kit for React.js",
   "keywords": [
     "react",
@@ -62,45 +62,25 @@
       "import": "./dist/components/auth/*.js",
       "types": "./dist/components/auth/*.d.ts"
     },
+    "./user": {
+      "import": "./dist/components/user/index.js",
+      "types": "./dist/components/user/index.d.ts"
+    },
+    "./user/settings": {
+      "import": "./dist/components/user/settings/index.js",
+      "types": "./dist/components/user/settings/index.d.ts"
+    },
+    "./user/settings/*": {
+      "import": "./dist/components/user/settings/*.js",
+      "types": "./dist/components/user/settings/*.d.ts"
+    },
     "./form": {
       "import": "./dist/components/form/index.js",
       "types": "./dist/components/form/index.d.ts"
     },
-    "./form/FormWithState": {
-      "import": "./dist/components/form/FormWithState.js",
-      "types": "./dist/components/form/FormWithState.d.ts"
-    },
-    "./form/Group": {
-      "import": "./dist/components/form/Group.js",
-      "types": "./dist/components/form/Group.d.ts"
-    },
-    "./form/GroupedAdvancedSelect": {
-      "import": "./dist/components/form/GroupedAdvancedSelect/index.js",
-      "types": "./dist/components/form/GroupedAdvancedSelect/index.d.ts"
-    },
-    "./form/Input": {
-      "import": "./dist/components/form/Input.js",
-      "types": "./dist/components/form/Input.d.ts"
-    },
-    "./form/Label": {
-      "import": "./dist/components/form/Label.js",
-      "types": "./dist/components/form/Label.d.ts"
-    },
-    "./form/ModalForm": {
-      "import": "./dist/components/form/ModalForm.js",
-      "types": "./dist/components/form/ModalForm.d.ts"
-    },
-    "./form/Select": {
-      "import": "./dist/components/form/Select.js",
-      "types": "./dist/components/form/Select.d.ts"
-    },
-    "./form/DatePicker": {
-      "import": "./dist/components/form/DatePicker.js",
-      "types": "./dist/components/form/DatePicker.d.ts"
-    },
-    "./form/SubmitButton": {
-      "import": "./dist/components/form/SubmitButton.js",
-      "types": "./dist/components/form/SubmitButton.d.ts"
+    "./form/*": {
+      "import": "./dist/components/form/*.js",
+      "types": "./dist/components/form/*.d.ts"
     }
   },
   "files": [
