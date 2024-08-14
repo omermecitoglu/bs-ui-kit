@@ -22,7 +22,7 @@ const HamburgerMenu = ({
     </DropdownToggle>
     <DropdownMenu>
       {items.map((item, index) => (
-        <Link key={index} href={item.href} className="dropdown-item">
+        <Link key={index} href={item.href}>
           <FontAwesomeIcon icon={item.icon} className="fa-fw me-1" />
           {item.title}
         </Link>
