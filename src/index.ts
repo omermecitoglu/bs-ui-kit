@@ -6,3 +6,4 @@ export { default as LongColumn } from "./components/LongColumn";
 export * from "./components/auth";
 export * from "./components/form";
 export * from "./components/user";
+export * from "./components/admin";
