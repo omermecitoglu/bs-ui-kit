@@ -1,6 +1,6 @@
 {
   "name": "@omer-x/bs-ui-kit",
-  "version": "0.11.0",
+  "version": "0.12.0",
   "description": "Bootstrap UI Kit for React.js",
   "keywords": [
     "react",
@@ -33,26 +33,6 @@
     ".": {
       "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
-    },
-    "./ActionButton": {
-      "import": "./dist/components/ActionButton.js",
-      "types": "./dist/components/ActionButton.d.ts"
-    },
-    "./CreateButton": {
-      "import": "./dist/components/CreateButton.js",
-      "types": "./dist/components/CreateButton.d.ts"
-    },
-    "./LinkButton": {
-      "import": "./dist/components/LinkButton.js",
-      "types": "./dist/components/LinkButton.d.ts"
-    },
-    "./DataTable": {
-      "import": "./dist/components/DataTable.js",
-      "types": "./dist/components/DataTable.d.ts"
-    },
-    "./LongColumn": {
-      "import": "./dist/components/LongColumn.js",
-      "types": "./dist/components/LongColumn.d.ts"
     },
     "./auth": {
       "import": "./dist/components/auth/index.js",
@@ -93,6 +73,10 @@
     "./form/*": {
       "import": "./dist/components/form/*.js",
       "types": "./dist/components/form/*.d.ts"
+    },
+    "./*": {
+      "import": "./dist/components/*.js",
+      "types": "./dist/components/*.d.ts"
     }
   },
   "files": [
