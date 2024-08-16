@@ -18,7 +18,7 @@ const PageTitle = ({
       ) : (
         <h2 className="m-0">{name}</h2>
       )}
-      <div className="d-flex gap-3">
+      <div className="d-flex gap-3 text-nowrap">
         {children}
       </div>
     </div>
