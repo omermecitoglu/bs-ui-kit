@@ -1,10 +1,11 @@
-"use client";
+import PageItem from "react-bootstrap/PageItem";
 import BootstrapPagination from "react-bootstrap/Pagination";
-import PageItem from "react-bootstrap/esm/PageItem";
+import PaginationLink from "./PaginationLink";
 import type { LinkProps } from "../types/link";
+import type { ReactNode } from "react";
 
 type PaginationProps = {
-  link: (props: LinkProps) => JSX.Element,
+  link: (props: LinkProps) => ReactNode,
   totalItems: number,
   itemsPerPage: number,
   currentPage: number,
@@ -20,58 +21,45 @@ const Pagination = ({
 }: PaginationProps) => {
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
-  const buildHref = (page: number) => {
-    const searchParams = new URLSearchParams();
-    for (const [key, value] of Object.entries(queryParams)) {
-      searchParams.append(key, value);
-    }
-    if (page === 1) {
-      searchParams.delete("page");
-    } else {
-      searchParams.set("page", page.toString());
-    }
-    return "?" + searchParams.toString();
-  };
-
   return (
     <BootstrapPagination className="mt-3 mb-0 justify-content-center" size="sm">
-      <PageItem as={Link} href={buildHref(currentPage - 1)} scroll={false} disabled={currentPage <= 1}>
+      <PaginationLink as={Link} pageNumber={currentPage - 1} disabled={currentPage <= 1} queryParams={queryParams}>
         &laquo;
-      </PageItem>
+      </PaginationLink>
       {currentPage > 3 && (
-        <PageItem as={Link} href={buildHref(1)} scroll={false}>{1}</PageItem>
+        <PaginationLink as={Link} pageNumber={1} queryParams={queryParams} />
       )}
       {currentPage === 5 && (
-        <PageItem as={Link} href={buildHref(2)} scroll={false}>{2}</PageItem>
+        <PaginationLink as={Link} pageNumber={2} queryParams={queryParams} />
       )}
       {currentPage > 5 && (
         <PageItem disabled>&hellip;</PageItem>
       )}
       {currentPage > 2 && (
-        <PageItem as={Link} href={buildHref(currentPage - 2)} scroll={false}>{currentPage - 2}</PageItem>
+        <PaginationLink as={Link} pageNumber={currentPage - 2} queryParams={queryParams} />
       )}
       {currentPage > 1 && (
-        <PageItem as={Link} href={buildHref(currentPage - 1)} scroll={false}>{currentPage - 1}</PageItem>
+        <PaginationLink as={Link} pageNumber={currentPage - 1} queryParams={queryParams} />
       )}
       <PageItem active>{currentPage}</PageItem>
       {currentPage <= totalPages - 1 && (
-        <PageItem as={Link} href={buildHref(currentPage + 1)} scroll={false}>{currentPage + 1}</PageItem>
+        <PaginationLink as={Link} pageNumber={currentPage + 1} queryParams={queryParams} />
       )}
       {currentPage <= totalPages - 2 && (
-        <PageItem as={Link} href={buildHref(currentPage + 2)} scroll={false}>{currentPage + 2}</PageItem>
+        <PaginationLink as={Link} pageNumber={currentPage + 2} queryParams={queryParams} />
       )}
       {currentPage <= totalPages - 5 && (
         <PageItem disabled>&hellip;</PageItem>
       )}
       {currentPage === totalPages - 4 && (
-        <PageItem as={Link} href={buildHref(totalPages - 1)} scroll={false}>{totalPages - 1}</PageItem>
+        <PaginationLink as={Link} pageNumber={totalPages - 1} queryParams={queryParams} />
       )}
       {currentPage <= totalPages - 3 && (
-        <PageItem as={Link} href={buildHref(totalPages)} scroll={false}>{totalPages}</PageItem>
+        <PaginationLink as={Link} pageNumber={totalPages} queryParams={queryParams} />
       )}
-      <PageItem as={Link} href={buildHref(currentPage + 1)} scroll={false} disabled={currentPage >= totalPages}>
+      <PaginationLink as={Link} pageNumber={currentPage + 1} disabled={currentPage >= totalPages} queryParams={queryParams}>
         &raquo;
-      </PageItem>
+      </PaginationLink>
     </BootstrapPagination>
   );
 };
