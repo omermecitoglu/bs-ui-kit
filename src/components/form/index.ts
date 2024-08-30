@@ -1,5 +1,6 @@
 export { default as FormWithState } from "./FormWithState";
 export { default as Group } from "./Group";
+export { default as AdvancedSelect } from "./AdvancedSelect";
 export { default as GroupedAdvancedSelect } from "./GroupedAdvancedSelect";
 export { default as Input } from "./Input";
 export { default as Label } from "./Label";
