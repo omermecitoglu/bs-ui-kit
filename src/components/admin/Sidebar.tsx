@@ -2,9 +2,10 @@ import Nav from "react-bootstrap/Nav";
 import SidebarLink from "./SidebarLink";
 import type { LinkProps } from "../../types/link";
 import type { NavItem } from "../../types/navigation";
+import type { ReactNode } from "react";
 
 type SidebarProps = {
-  navLink: (props: LinkProps) => JSX.Element,
+  navLink: (props: LinkProps) => ReactNode,
   items: NavItem[],
 };
 

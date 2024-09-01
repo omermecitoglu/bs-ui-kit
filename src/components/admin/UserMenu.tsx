@@ -9,13 +9,14 @@ import DropdownToggle from "react-bootstrap/DropdownToggle";
 import Form from "react-bootstrap/Form";
 import type { LinkProps } from "../../types/link";
 import type { NavItem } from "../../types/navigation";
+import type { ReactNode } from "react";
 
 export type UserMenuProps<UserType, UserName extends keyof UserType> = {
   user: UserType,
   nameField: UserName,
   logoutAction: () => Promise<void>,
   logoutText: string,
-  dropdownLink: (props: LinkProps) => JSX.Element,
+  dropdownLink: (props: LinkProps) => ReactNode,
   items: NavItem[],
 };
 

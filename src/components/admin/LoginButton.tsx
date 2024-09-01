@@ -1,9 +1,10 @@
 import { faKey } from "@fortawesome/free-solid-svg-icons/faKey";
 import LinkButton from "../LinkButton";
 import type { LinkProps } from "../../types/link";
+import type { ReactNode } from "react";
 
 type LoginButtonProps = {
-  link: (props: LinkProps) => JSX.Element,
+  link: (props: LinkProps) => ReactNode,
   href: string,
   text: string,
 };

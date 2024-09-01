@@ -16,7 +16,7 @@ type Column<CI, K extends keyof CI, PK extends keyof CI> = {
 };
 
 export type DataTableProps<CI, K extends keyof CI, PK extends keyof CI> = {
-  link: (props: LinkProps) => JSX.Element,
+  link: (props: LinkProps) => ReactNode,
   collection: CI[],
   primaryKey: PK,
   schema: {

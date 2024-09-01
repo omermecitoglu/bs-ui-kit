@@ -1,9 +1,10 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import type { LinkProps } from "../../types/link";
 import type { NavItem } from "../../types/navigation";
+import type { ReactNode } from "react";
 
 export type SidebarLinkProps = {
-  as: (props: LinkProps) => JSX.Element,
+  as: (props: LinkProps) => ReactNode,
   item: NavItem,
 };
 

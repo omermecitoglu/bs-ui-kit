@@ -10,10 +10,10 @@ import type { ReactNode } from "react";
 type LayoutProps<UserType, UserName extends keyof UserType> = {
   brandName?: string,
   logo: ReactNode,
-  link: (props: LinkProps) => JSX.Element,
+  link: (props: LinkProps) => ReactNode,
   logoHref?: string,
-  navLink: (props: LinkProps) => JSX.Element,
-  dropdownLink: (props: LinkProps) => JSX.Element,
+  navLink: (props: LinkProps) => ReactNode,
+  dropdownLink: (props: LinkProps) => ReactNode,
   navItems: NavItem[],
   loadUser: () => Promise<UserType | null>,
   userNameField: UserName,

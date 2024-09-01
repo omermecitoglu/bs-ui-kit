@@ -7,7 +7,7 @@ import type { ReactNode } from "react";
 
 type LayoutProps = {
   logo: ReactNode,
-  link: (props: LinkProps) => JSX.Element,
+  link: (props: LinkProps) => ReactNode,
   brandName?: string,
   launchYear?: string,
   children: ReactNode,

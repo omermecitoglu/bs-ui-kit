@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 type BrandProps = {
   name: string,
   logo: ReactNode,
-  link: (props: LinkProps) => JSX.Element,
+  link: (props: LinkProps) => ReactNode,
   href?: string,
 };
 

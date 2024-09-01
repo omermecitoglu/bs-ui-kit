@@ -3,11 +3,12 @@ import FormWithState from "../form/FormWithState";
 import Input from "../form/Input";
 import SubmitButton from "../form/SubmitButton";
 import type { LinkProps } from "../../types/link";
+import type { ReactNode } from "react";
 
 type LoginFormProps = {
   title: string,
   action: (_: unknown, formData: FormData) => Promise<Record<string, string>>,
-  link: (props: LinkProps) => JSX.Element,
+  link: (props: LinkProps) => ReactNode,
   usernameLabel: string,
   usernameKey: string,
   passwordLabel: string,

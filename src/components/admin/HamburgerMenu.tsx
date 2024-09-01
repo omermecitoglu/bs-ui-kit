@@ -5,9 +5,10 @@ import DropdownMenu from "react-bootstrap/DropdownMenu";
 import DropdownToggle from "react-bootstrap/DropdownToggle";
 import type { LinkProps } from "../../types/link";
 import type { NavItem } from "../../types/navigation";
+import type { ReactNode } from "react";
 
 type HamburgerMenuProps = {
-  dropdownLink: (props: LinkProps) => JSX.Element,
+  dropdownLink: (props: LinkProps) => ReactNode,
   items: NavItem[],
 };
 

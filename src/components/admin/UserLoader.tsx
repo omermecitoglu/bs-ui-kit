@@ -1,10 +1,11 @@
 import LoginButton from "./LoginButton";
 import type { LinkProps } from "../../types/link";
+import type { ReactNode } from "react";
 
 type UserLoaderProps<UserType> = {
   loadUser: () => Promise<UserType | null>,
-  userMenu: (user: UserType) => JSX.Element,
-  link: (props: LinkProps) => JSX.Element,
+  userMenu: (user: UserType) => ReactNode,
+  link: (props: LinkProps) => ReactNode,
   loginPageURL: string,
   loginButtonText: string,
 };
