@@ -6,6 +6,7 @@ export { default as DataTable } from "./components/DataTable";
 export { default as Pagination } from "./components/Pagination";
 export { default as LongColumn } from "./components/LongColumn";
 export { default as ThemedBody } from "./components/ThemedBody";
+export { default as SelectTheme } from "./components/SelectTheme";
 export * from "./components/auth";
 export * from "./components/form";
 export * from "./components/user";
