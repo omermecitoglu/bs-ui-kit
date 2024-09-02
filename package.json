@@ -1,6 +1,6 @@
 {
   "name": "@omer-x/bs-ui-kit",
-  "version": "0.14.1",
+  "version": "0.15.0",
   "description": "Bootstrap UI Kit for React.js",
   "keywords": [
     "react",
@@ -73,6 +73,10 @@
     "./form/*": {
       "import": "./dist/components/form/*.js",
       "types": "./dist/components/form/*.d.ts"
+    },
+    "./theme": {
+      "import": "./dist/contexts/theme.js",
+      "types": "./dist/contexts/theme.d.ts"
     },
     "./*": {
       "import": "./dist/components/*.js",
