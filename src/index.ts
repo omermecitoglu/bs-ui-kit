@@ -3,6 +3,7 @@ export { default as ActionButton } from "./components/ActionButton";
 export { default as CreateButton } from "./components/CreateButton";
 export { default as LinkButton } from "./components/LinkButton";
 export { default as DataTable } from "./components/DataTable";
+export { default as InfoTable } from "./components/InfoTable";
 export { default as Pagination } from "./components/Pagination";
 export { default as LongColumn } from "./components/LongColumn";
 export { default as ThemedBody } from "./components/ThemedBody";
