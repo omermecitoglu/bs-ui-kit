@@ -44,7 +44,13 @@ const ThemedBody = ({
   };
 
   return (
-    <ThemeContext.Provider value={{ theme: theme ?? deviceTheme, setTheme: updateTheme }}>
+    <ThemeContext.Provider
+      value={{
+        selectedTheme: theme,
+        actualTheme: theme ?? deviceTheme,
+        setTheme: updateTheme,
+      }}
+    >
       <body data-bs-theme={theme ?? deviceTheme}>
         {children}
       </body>

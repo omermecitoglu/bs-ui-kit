@@ -4,12 +4,14 @@ import { createContext } from "react";
 export type Theme = "light" | "dark";
 
 type ThemeContextData = {
-  theme: Theme | null,
+  selectedTheme: Theme | null,
+  actualTheme: Theme,
   setTheme: (theme: Theme | null) => void,
 };
 
 const ThemeContext = createContext<ThemeContextData>({
-  theme: "dark",
+  selectedTheme: null,
+  actualTheme: "dark",
   setTheme: () => null,
 });
 

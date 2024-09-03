@@ -18,7 +18,7 @@ const SelectTheme = ({
   darkThemeName = "Dark",
   defaultThemeName = "Device default",
 }: SelectThemeProps) => {
-  const { theme, setTheme } = useContext(ThemeContext);
+  const { selectedTheme, setTheme } = useContext(ThemeContext);
 
   const getThemeName = (key: string) => {
     switch (key) {
@@ -38,7 +38,7 @@ const SelectTheme = ({
         "dark",
       ]}
       optionName={getThemeName}
-      value={theme ?? ""}
+      value={selectedTheme ?? ""}
       onChange={t => setTheme(t !== "" ? t : null)}
     />
   );
