@@ -14,6 +14,9 @@ type FormWithStateProps = {
   children: ReactNode,
 };
 
+/**
+ * @deprecated use ProgressiveForm instead
+ */
 const FormWithState = ({
   action,
   messages = {},

@@ -1,4 +1,5 @@
 export { default as FormWithState } from "./FormWithState";
+export { default as ProgressiveForm } from "./ProgressiveForm";
 export { default as Group } from "./Group";
 export { default as AdvancedSelect } from "./AdvancedSelect";
 export { default as GroupedAdvancedSelect } from "./GroupedAdvancedSelect";
