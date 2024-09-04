@@ -17,7 +17,7 @@ export type UserMenuProps<UserType, UserName extends keyof UserType> = {
   logoutAction: () => Promise<void>,
   logoutText: string,
   dropdownLink: (props: LinkProps) => ReactNode,
-  items: NavItem[],
+  items: NavItem<UserType>[],
 };
 
 const UserMenu = <UT extends Record<string, unknown>, UN extends keyof UT>({
@@ -35,8 +35,8 @@ const UserMenu = <UT extends Record<string, unknown>, UN extends keyof UT>({
       <span className="d-sm-none">&nbsp;</span>
     </DropdownToggle>
     <DropdownMenu>
-      {items.map((item, index) => (
-        <Link key={index} href={item.href}>
+      {items.filter(item => !item.isVisible || item.isVisible(user)).map(item => (
+        <Link key={item.href} href={item.href}>
           <FontAwesomeIcon icon={item.icon} className="fa-fw me-1" />
           {item.title}
         </Link>

@@ -23,7 +23,7 @@ type SiteHeaderProps<UserType, UserName extends keyof UserType> = {
   loginText: string,
   logoutAction: () => Promise<void>,
   logoutText: string,
-  userMenuItems: NavItem[],
+  userMenuItems: NavItem<UserType>[],
   fluid?: boolean,
   breakpoint?: "xs" | "sm" | "md" | "lg" | "xl" | "xxl",
 };

@@ -21,7 +21,7 @@ type LayoutProps<UserType, UserName extends keyof UserType> = {
   loginText: string,
   logoutAction: () => Promise<void>,
   logoutText: string,
-  userMenuItems: NavItem[],
+  userMenuItems: NavItem<UserType>[],
   children?: ReactNode,
 };
 
