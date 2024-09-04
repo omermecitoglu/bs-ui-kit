@@ -19,7 +19,8 @@ type LoginFormProps = {
   rememberLabel?: string,
   rememberKey?: string,
   rememberValue?: string,
-  registerSuggestion: string,
+  registerSuggestion: ReactNode,
+  externalLoginMethods?: ReactNode,
   loginExceptions?: Record<string, string>,
   emailExceptions?: Record<string, string>,
 };
@@ -39,6 +40,7 @@ const LoginForm = ({
   rememberKey,
   rememberValue = "yes",
   registerSuggestion,
+  externalLoginMethods,
   loginExceptions,
   emailExceptions,
 }: LoginFormProps) => (
@@ -81,6 +83,7 @@ const LoginForm = ({
         )}
       </div>
     </FormWithState>
+    {externalLoginMethods}
     <div className="mt-4 mb-2 form-text text-center">
       {registerSuggestion}
     </div>

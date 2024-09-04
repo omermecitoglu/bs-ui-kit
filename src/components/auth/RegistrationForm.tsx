@@ -1,6 +1,7 @@
 import FormWithState from "../form/FormWithState";
 import Input from "../form/Input";
 import SubmitButton from "../form/SubmitButton";
+import type { ReactNode } from "react";
 
 type RegistrationFormProps = {
   title: string,
@@ -12,8 +13,8 @@ type RegistrationFormProps = {
   passwordLabel: string,
   passwordKey: string,
   submitText: string,
-  terms: string,
-  loginSuggestion: string,
+  terms: ReactNode,
+  loginSuggestion: ReactNode,
   commonExceptions?: Record<string, string>,
   emailExceptions?: Record<string, string>,
 };

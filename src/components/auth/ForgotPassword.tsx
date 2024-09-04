@@ -1,6 +1,7 @@
 import FormWithState from "../form/FormWithState";
 import Input from "../form/Input";
 import SubmitButton from "../form/SubmitButton";
+import type { ReactNode } from "react";
 
 type ForgotPasswordProps = {
   title: string,
@@ -8,7 +9,7 @@ type ForgotPasswordProps = {
   usernameLabel: string,
   usernameKey: string,
   submitText: string,
-  loginSuggestion: string,
+  loginSuggestion: ReactNode,
   commonExceptions?: Record<string, string>,
   emailExceptions?: Record<string, string>,
 };
