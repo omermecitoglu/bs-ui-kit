@@ -78,6 +78,14 @@
       "import": "./dist/contexts/theme.js",
       "types": "./dist/contexts/theme.d.ts"
     },
+    "./hooks": {
+      "import": "./dist/hooks/index.js",
+      "types": "./dist/hooks/index.d.ts"
+    },
+    "./hooks/*": {
+      "import": "./dist/hooks/*.js",
+      "types": "./dist/hooks/*.d.ts"
+    },
     "./*": {
       "import": "./dist/components/*.js",
       "types": "./dist/components/*.d.ts"
