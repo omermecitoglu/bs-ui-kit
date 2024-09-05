@@ -96,8 +96,9 @@
   ],
   "scripts": {
     "dev": "tsc --watch",
+    "predev": "copyfiles -f src/styles/* dist/styles",
     "build": "tsc",
-    "postbuild": "copyfiles -f src/styles/* dist/styles && echo 'CSS files copied.'"
+    "postbuild": "copyfiles -f src/styles/* dist/styles"
   },
   "peerDependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
