@@ -2,6 +2,8 @@ import { type ZodIssue, ZodIssueCode } from "zod";
 
 function handleZodIssue(issue: ZodIssue) {
   switch (issue.code) {
+    case ZodIssueCode.custom:
+      return issue.params?.customErrorCode ?? issue.message;
     case ZodIssueCode.invalid_string:
       return `invalid_${issue.validation}`;
     default:
