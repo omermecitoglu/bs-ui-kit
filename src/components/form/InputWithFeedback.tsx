@@ -2,6 +2,7 @@
 import { useContext } from "react";
 import Feedback from "react-bootstrap/Feedback";
 import FormContext from "../../core/form-context";
+import { findError } from "../../utils/form";
 import SimpleInput, { type HtmlInputProps } from "./SimpleInput";
 
 export type InputWithFeedbackProps = {
@@ -9,12 +10,12 @@ export type InputWithFeedbackProps = {
 };
 
 const InputWithFeedback = ({
-  messages,
+  messages = {},
   name,
   ...props
 }: HtmlInputProps & InputWithFeedbackProps) => {
   const context = useContext(FormContext);
-  const inputError = context.errors[name];
+  const inputError = findError(context.errors, name);
   return (
     <>
       <SimpleInput
@@ -24,7 +25,7 @@ const InputWithFeedback = ({
       />
       {inputError && (
         <Feedback type="invalid">
-          {(messages ? messages[inputError] : null) ?? context.messages[inputError] ?? inputError}
+          {messages[inputError] ?? context.messages[inputError] ?? inputError}
         </Feedback>
       )}
     </>
