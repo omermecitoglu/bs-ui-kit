@@ -1,6 +1,6 @@
 import FormCheck from "react-bootstrap/FormCheck";
-import FormWithState from "../form/FormWithState";
 import Input from "../form/Input";
+import ProgressiveForm from "../form/ProgressiveForm";
 import SubmitButton from "../form/SubmitButton";
 
 type ResetPasswordProps = {
@@ -18,6 +18,7 @@ type ResetPasswordProps = {
   hardResetKey?: string,
   hardResetValue?: string,
   commonExceptions?: Record<string, string>,
+  confirmationExceptions?: Record<string, string>,
 };
 
 const ResetPassword = ({
@@ -35,10 +36,11 @@ const ResetPassword = ({
   hardResetKey,
   hardResetValue = "yes",
   commonExceptions,
+  confirmationExceptions,
 }: ResetPasswordProps) => (
   <>
     <h1 className="fs-4 card-title fw-bold mb-4">{title}</h1>
-    <FormWithState action={action} messages={commonExceptions}>
+    <ProgressiveForm action={action} messages={commonExceptions}>
       <Input
         label={usernameLabel}
         type="email"
@@ -60,6 +62,7 @@ const ResetPassword = ({
         type="password"
         name={confirmPasswordKey}
         autoComplete="new-password"
+        messages={confirmationExceptions}
         required
       />
       <div className="d-flex flex-row-reverse justify-content-between align-items-center mb-3">
@@ -76,7 +79,7 @@ const ResetPassword = ({
           <input type="hidden" name="hard-reset" value="no" />
         )}
       </div>
-    </FormWithState>
+    </ProgressiveForm>
   </>
 );
 
