@@ -6,6 +6,9 @@ type PageTitleProps = {
   children?: ReactNode,
 };
 
+/**
+ * @deprecated use PageSection instead
+ */
 const PageTitle = ({
   name,
   secondary = false,

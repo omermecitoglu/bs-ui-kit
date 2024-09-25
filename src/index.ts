@@ -1,3 +1,4 @@
+export { default as PageSection } from "./components/PageSection";
 export { default as PageTitle } from "./components/PageTitle";
 export { default as ActionButton } from "./components/ActionButton";
 export { default as CreateButton } from "./components/CreateButton";
