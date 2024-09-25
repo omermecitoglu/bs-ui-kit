@@ -1,4 +1,4 @@
-import FormWithState from "../form/FormWithState";
+import ProgressiveForm from "../form/ProgressiveForm";
 import Input from "../form/Input";
 import SubmitButton from "../form/SubmitButton";
 import type { ReactNode } from "react";
@@ -36,7 +36,7 @@ const RegistrationForm = ({
 }: RegistrationFormProps) => (
   <>
     <h1 className="fs-4 card-title fw-bold mb-4">{title}</h1>
-    <FormWithState action={action} messages={commonExceptions}>
+    <ProgressiveForm action={action} messages={commonExceptions}>
       <Input
         label={displayNameLabel}
         type="text"
@@ -67,7 +67,7 @@ const RegistrationForm = ({
       <div className="d-flex flex-row-reverse justify-content-between align-items-center">
         <SubmitButton text={submitText} />
       </div>
-    </FormWithState>
+    </ProgressiveForm>
     <div className="mt-4 mb-2 form-text text-center">
       {loginSuggestion}
     </div>

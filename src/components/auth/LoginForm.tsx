@@ -1,5 +1,5 @@
 import FormCheck from "react-bootstrap/FormCheck";
-import FormWithState from "../form/FormWithState";
+import ProgressiveForm from "../form/ProgressiveForm";
 import Input from "../form/Input";
 import SubmitButton from "../form/SubmitButton";
 import type { LinkProps } from "../../types/link";
@@ -46,7 +46,7 @@ const LoginForm = ({
 }: LoginFormProps) => (
   <>
     <h1 className="fs-4 card-title fw-bold mb-4">{title}</h1>
-    <FormWithState action={action} messages={loginExceptions}>
+    <ProgressiveForm action={action} messages={loginExceptions}>
       <Input
         label={usernameLabel}
         type="email"
@@ -82,7 +82,7 @@ const LoginForm = ({
           />
         )}
       </div>
-    </FormWithState>
+    </ProgressiveForm>
     {externalLoginMethods}
     <div className="mt-4 mb-2 form-text text-center">
       {registerSuggestion}
