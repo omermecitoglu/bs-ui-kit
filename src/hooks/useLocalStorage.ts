@@ -1,11 +1,12 @@
 "use client";
 import { useCallback, useSyncExternalStore } from "react";
+import { safeParseJSON } from "../utils/json";
 
 export default function useLocalStorage<T = string>(key: string, initialValue: T | null = null) {
   const data = useSyncExternalStore(
     onChange => {
       const onStorageEvent = (e: Event) => {
-        const customEvent = e as CustomEvent;
+        const customEvent = e as CustomEvent<{ key: string }>;
         if (customEvent.detail.key === key) {
           onChange();
         }
@@ -17,15 +18,19 @@ export default function useLocalStorage<T = string>(key: string, initialValue: T
         window.removeEventListener("local-storage-change", onStorageEvent as EventListener);
       };
     },
-    () => localStorage.getItem(key) as T || initialValue,
+    () => {
+      const item = localStorage.getItem(key);
+      const value = item && safeParseJSON<T>(item);
+      return value || initialValue;
+    },
     () => initialValue
   );
 
-  const setData = useCallback((value: string | null) => {
+  const setData = useCallback((value: T | null) => {
     if (value === null) {
       localStorage.removeItem(key);
     } else {
-      localStorage.setItem(key, value);
+      localStorage.setItem(key, JSON.stringify(value));
     }
     window.dispatchEvent(new CustomEvent("local-storage-change", { detail: { key } }));
   }, [key]);
