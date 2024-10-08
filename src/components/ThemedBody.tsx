@@ -1,6 +1,7 @@
 "use client";
 import { type ReactNode, useEffect, useState } from "react";
 import ThemeContext, { type Theme } from "../contexts/theme";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 type ThemedBodyProps = {
   children: ReactNode,
@@ -10,7 +11,7 @@ const ThemedBody = ({
   children,
 }: ThemedBodyProps) => {
   const [deviceTheme, setDeviceTheme] = useState<Theme>("dark");
-  const [theme, setTheme] = useState<Theme | null>(null);
+  const [theme, setTheme] = useLocalStorage<Theme>("theme");
 
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
@@ -28,27 +29,12 @@ const ThemedBody = ({
     };
   }, []);
 
-  useEffect(() => {
-    const localTheme = localStorage.getItem("theme");
-    if (!localTheme) return;
-    setTheme(localTheme as Theme);
-  }, []);
-
-  const updateTheme = (t: Theme | null) => {
-    if (t) {
-      localStorage.setItem("theme", t);
-    } else {
-      localStorage.removeItem("theme");
-    }
-    setTheme(t);
-  };
-
   return (
     <ThemeContext.Provider
       value={{
         selectedTheme: theme,
         actualTheme: theme ?? deviceTheme,
-        setTheme: updateTheme,
+        setTheme,
       }}
     >
       <body data-bs-theme={theme ?? deviceTheme}>
