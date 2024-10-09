@@ -4,6 +4,7 @@ import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import Brand from "./Brand";
 import HamburgerMenu from "./HamburgerMenu";
+import HamburgerMenuPlaceholder from "./HamburgerMenuPlaceholder";
 import LoginButton from "./LoginButton";
 import UserMenu from "./UserMenu";
 import UserPlaceholder from "./UserPlaceholder";
@@ -58,7 +59,7 @@ const SiteHeader = <UT extends Record<string, unknown>, UN extends keyof UT>({
           <div className="d-md-none">
             <UserShell
               loadUser={loadUser}
-              pending={<>pending...</>}
+              pending={<HamburgerMenuPlaceholder />}
               success={user => (
                 <HamburgerMenu dropdownLink={dropdownLink} items={navItems} user={user} />
               )}
