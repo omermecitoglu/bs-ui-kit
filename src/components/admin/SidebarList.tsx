@@ -4,17 +4,17 @@ import type { LinkProps } from "../../types/link";
 import type { NavItem } from "../../types/navigation";
 import type { ReactNode } from "react";
 
-type SidebarProps<UserType> = {
+type SidebarListProps<UserType> = {
   navLink: (props: LinkProps) => ReactNode,
   items: NavItem<UserType>[],
   user?: UserType,
 };
 
-const Sidebar = <UT extends Record<string, unknown>>({
+const SidebarList = <UT extends Record<string, unknown>>({
   navLink,
   items,
   user,
-}: SidebarProps<UT>) => (
+}: SidebarListProps<UT>) => (
   <div id="admin-sidebar" className="d-none d-md-block col-md-3 col-lg-2 py-3 bg-body-tertiary border-end">
     <div className="sticky-md-top">
       <Nav defaultActiveKey={items[0].href} className="flex-column">
@@ -26,4 +26,4 @@ const Sidebar = <UT extends Record<string, unknown>>({
   </div>
 );
 
-export default Sidebar;
+export default SidebarList;
