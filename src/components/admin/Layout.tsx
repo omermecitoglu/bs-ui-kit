@@ -1,3 +1,5 @@
+import { faSpinner } from "@fortawesome/free-solid-svg-icons/faSpinner";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -66,7 +68,11 @@ const Layout = <UT extends Record<string, unknown>, UN extends keyof UT>({
         <Sidebar>
           <UserShell
             loadUser={loadUser}
-            pending={<>pending...</>}
+            pending={(
+              <div className="text-center mt-3">
+                <FontAwesomeIcon size="2x" icon={faSpinner} className="fa-fw fa-spin-pulse" />
+              </div>
+            )}
             success={user => (
               <SidebarList navLink={navLink} items={navItems} user={user} />
             )}
