@@ -1,7 +1,7 @@
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-import Sidebar from "./Sidebar";
+import SidebarList from "./SidebarList";
 import SiteHeader from "./SiteHeader";
 import UserShell from "./UserShell";
 import type { LinkProps } from "../../types/link";
@@ -66,7 +66,7 @@ const Layout = <UT extends Record<string, unknown>, UN extends keyof UT>({
           loadUser={loadUser}
           pending={<>pending...</>}
           success={user => (
-            <Sidebar navLink={navLink} items={navItems} user={user} />
+            <SidebarList navLink={navLink} items={navItems} user={user} />
           )}
           userCanBeIgnored
           items={navItems}
