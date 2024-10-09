@@ -1,34 +1,22 @@
-import LoginButton from "./LoginButton";
-import type { LinkProps } from "../../types/link";
 import type { ReactNode } from "react";
 
 type UserLoaderProps<UserType> = {
   loadUser: () => Promise<UserType | null>,
-  userMenu: (user: UserType) => ReactNode,
-  link: (props: LinkProps) => ReactNode,
-  loginPageURL: string,
-  loginButtonText: string,
+  success: (user: UserType) => ReactNode,
+  fallback?: ReactNode,
 };
 
 const UserLoader = async <UserType extends Record<string, unknown>>({
   loadUser,
-  userMenu,
-  link,
-  loginPageURL,
-  loginButtonText,
+  success,
+  fallback,
 }: UserLoaderProps<UserType>) => {
   try {
     const user = await loadUser();
     if (!user) throw new Error("user is null");
-    return userMenu(user);
+    return success(user);
   } catch {
-    return (
-      <LoginButton
-        link={link}
-        href={loginPageURL}
-        text={loginButtonText}
-      />
-    );
+    return fallback ?? success(null as unknown as UserType);
   }
 };
 

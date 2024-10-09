@@ -1,12 +1,13 @@
 import classNames from "classnames";
-import { type ReactNode, Suspense } from "react";
+import { type ReactNode } from "react";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import Brand from "./Brand";
 import HamburgerMenu from "./HamburgerMenu";
-import UserLoader from "./UserLoader";
+import LoginButton from "./LoginButton";
 import UserMenu from "./UserMenu";
 import UserPlaceholder from "./UserPlaceholder";
+import UserShell from "./UserShell";
 import type { LinkProps } from "../../types/link";
 import type { NavItem } from "../../types/navigation";
 
@@ -60,25 +61,21 @@ const SiteHeader = <UT extends Record<string, unknown>, UN extends keyof UT>({
         )}
         <Brand name={brandName} logo={logo} link={link} href={logoHref} />
         <div className="w-100 d-none d-sm-block" />
-        <Suspense fallback={<UserPlaceholder />}>
-          {/* @ts-expect-error Async Server Component */}
-          <UserLoader<UT>
-            loadUser={loadUser}
-            link={link}
-            loginPageURL={loginPageURL}
-            loginButtonText={loginText}
-            userMenu={user => (
-              <UserMenu<UT, UN>
-                user={user}
-                nameField={userNameField}
-                logoutAction={logoutAction}
-                logoutText={logoutText}
-                dropdownLink={dropdownLink}
-                items={userMenuItems}
-              />
-            )}
-          />
-        </Suspense>
+        <UserShell
+          loadUser={loadUser}
+          pending={<UserPlaceholder />}
+          success={user => (
+            <UserMenu<UT, UN>
+              user={user}
+              nameField={userNameField}
+              logoutAction={logoutAction}
+              logoutText={logoutText}
+              dropdownLink={dropdownLink}
+              items={userMenuItems}
+            />
+          )}
+          fallback={<LoginButton link={link} href={loginPageURL} text={loginText} />}
+        />
       </div>
     </Container>
   </Navbar>
