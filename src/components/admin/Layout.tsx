@@ -1,6 +1,7 @@
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
+import Sidebar from "./Sidebar";
 import SidebarList from "./SidebarList";
 import SiteHeader from "./SiteHeader";
 import UserShell from "./UserShell";
@@ -62,15 +63,17 @@ const Layout = <UT extends Record<string, unknown>, UN extends keyof UT>({
     />
     <Container as="main" fluid>
       <Row className="row-gap-3">
-        <UserShell
-          loadUser={loadUser}
-          pending={<>pending...</>}
-          success={user => (
-            <SidebarList navLink={navLink} items={navItems} user={user} />
-          )}
-          userCanBeIgnored
-          items={navItems}
-        />
+        <Sidebar>
+          <UserShell
+            loadUser={loadUser}
+            pending={<>pending...</>}
+            success={user => (
+              <SidebarList navLink={navLink} items={navItems} user={user} />
+            )}
+            userCanBeIgnored
+            items={navItems}
+          />
+        </Sidebar>
         <Col md="9" lg="10" className="py-3">
           {children}
         </Col>

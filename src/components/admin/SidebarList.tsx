@@ -15,15 +15,11 @@ const SidebarList = <UT extends Record<string, unknown>>({
   items,
   user,
 }: SidebarListProps<UT>) => (
-  <div id="admin-sidebar" className="d-none d-md-block col-md-3 col-lg-2 py-3 bg-body-tertiary border-end">
-    <div className="sticky-md-top">
-      <Nav defaultActiveKey={items[0].href} className="flex-column">
-        {items.filter(item => !item.isVisible || !user || item.isVisible(user)).map((item, index) => (
-          <SidebarLink key={index} as={navLink} item={item} />
-        ))}
-      </Nav>
-    </div>
-  </div>
+  <Nav defaultActiveKey={items[0].href} className="flex-column">
+    {items.filter(item => !item.isVisible || !user || item.isVisible(user)).map((item, index) => (
+      <SidebarLink key={index} as={navLink} item={item} />
+    ))}
+  </Nav>
 );
 
 export default SidebarList;
