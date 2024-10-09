@@ -17,7 +17,7 @@ type SiteHeaderProps<UserType, UserName extends keyof UserType> = {
   link: (props: LinkProps) => ReactNode,
   logoHref?: string,
   dropdownLink: (props: LinkProps) => ReactNode,
-  navItems?: NavItem[],
+  navItems?: NavItem<UserType>[],
   loadUser: () => Promise<UserType | null>,
   userNameField: UserName,
   loginPageURL: string,
@@ -56,7 +56,15 @@ const SiteHeader = <UT extends Record<string, unknown>, UN extends keyof UT>({
       <div className="w-100 d-flex justify-content-between align-items-center gap-4 text-light text-nowrap">
         {navItems && (
           <div className="d-md-none">
-            <HamburgerMenu dropdownLink={dropdownLink} items={navItems} />
+            <UserShell
+              loadUser={loadUser}
+              pending={<>pending...</>}
+              success={user => (
+                <HamburgerMenu dropdownLink={dropdownLink} items={navItems} user={user} />
+              )}
+              userCanBeIgnored
+              items={navItems}
+            />
           </div>
         )}
         <Brand name={brandName} logo={logo} link={link} href={logoHref} />
