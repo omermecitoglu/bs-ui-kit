@@ -2,7 +2,7 @@
   "compilerOptions": {
     "outDir": "dist",
     "target": "ESNext",
-    "lib": ["ESNext", "DOM"],
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "types": ["react-dom/experimental"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -20,7 +20,8 @@
   "include": [
     "global.d.ts",
     "src/index.ts",
-    "src/utils/zod.ts"
+    "src/utils/zod.ts",
+    "src/utils/form-data.ts",
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "dist"],
 }

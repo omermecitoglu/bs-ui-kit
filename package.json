@@ -90,6 +90,10 @@
       "import": "./dist/utils/zod.js",
       "types": "./dist/utils/zod.d.ts"
     },
+    "./form-data": {
+      "import": "./dist/utils/form-data.js",
+      "types": "./dist/utils/form-data.d.ts"
+    },
     "./*": {
       "import": "./dist/components/*.js",
       "types": "./dist/components/*.d.ts"
