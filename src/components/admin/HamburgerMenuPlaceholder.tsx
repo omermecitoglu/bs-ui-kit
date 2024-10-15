@@ -1,6 +1,6 @@
 import { faBars } from "@fortawesome/free-solid-svg-icons/faBars";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import DropdownToggle from "react-bootstrap/esm/DropdownToggle";
+import DropdownToggle from "react-bootstrap/DropdownToggle";
 
 const HamburgerMenuPlaceholder = () => (
   <DropdownToggle variant="outline-success" className="d-flex align-items-center" disabled>
