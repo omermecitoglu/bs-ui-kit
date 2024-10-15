@@ -5,7 +5,7 @@ import SimpleInput, { type HtmlInputProps } from "./SimpleInput";
 import type { ReactNode } from "react";
 
 export type InputProps = {
-  label: string,
+  label?: string,
   /**
    * @deprecated This prop is deprecated and will be removed in future versions.
    */
@@ -22,7 +22,9 @@ const Input = ({
   ...props
 }: InputProps & HtmlInputProps & InputWithFeedbackProps) => (
   <Group id={name}>
-    <Label text={label} />
+    {label && (
+      <Label text={label} />
+    )}
     {children}
     {(!!feedback || !!messages) ? (
       <InputWithFeedback name={name} messages={messages} {...props} />
