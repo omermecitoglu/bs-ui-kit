@@ -10,6 +10,14 @@ type FormWithStateProps = {
   action: (_: unknown, formData: FormData) => Promise<Record<string, string>>,
   messages?: Record<string, string | undefined>,
   hideAfterPost?: boolean,
+  /**
+   * @deprecated This prop is deprecated and will be removed in future versions.
+   */
+  noGap?: boolean,
+  /**
+   * @deprecated This prop is deprecated and will be removed in future versions.
+   */
+  onStateChange?: (newState: Record<string, string>) => void,
   className?: string,
   children: ReactNode,
 };
@@ -21,12 +29,19 @@ const FormWithState = ({
   action,
   messages = {},
   hideAfterPost = false,
+  noGap,
+  onStateChange,
   className,
   children,
 }: FormWithStateProps) => {
   const [show, setShow] = useState(true);
   const [formState, formAction] = useFormState(action, {});
-  useEffect(() => setShow(true), [formState]);
+  useEffect(() => {
+    if (onStateChange) {
+      onStateChange(formState);
+    }
+    setShow(true);
+  }, [formState]);
   const dismiss = () => setShow(false);
 
   return (
@@ -55,7 +70,7 @@ const FormWithState = ({
         {hideAfterPost && formState["[success]"] ? false : (
           <Form
             action={formAction as unknown as string}
-            className={classNames("d-flex flex-column gap-3", className)}
+            className={classNames("d-flex flex-column", !noGap && "gap-3", className)}
           >
             {children}
           </Form>
