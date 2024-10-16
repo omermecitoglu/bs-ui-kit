@@ -47,7 +47,7 @@ const FormWithState = ({
   return (
     <>
       {show && formState["[success]"] && (
-        <Alert variant="success" onClose={dismiss} dismissible>
+        <Alert variant="success" onClose={dismiss} dismissible={!hideAfterPost}>
           {messages[formState["[success]"]] ?? formState["[success]"]}
         </Alert>
       )}
