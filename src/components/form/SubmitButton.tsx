@@ -10,6 +10,7 @@ type SubmitButtonProps = {
   text: string,
   variant?: ButtonVariant,
   stretched?: boolean,
+  className?: string,
 };
 
 const SubmitButton = ({
@@ -17,6 +18,7 @@ const SubmitButton = ({
   text,
   variant = "primary",
   stretched = false,
+  className,
 }: SubmitButtonProps) => {
   const { pending } = useFormStatus();
 
@@ -28,6 +30,7 @@ const SubmitButton = ({
       variant={variant}
       spinning={pending}
       stretched={stretched}
+      className={className}
     />
   );
 };
