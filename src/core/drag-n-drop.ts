@@ -27,9 +27,7 @@ async function getEntriesRecursively(entry: FileSystemEntry | null, collection: 
   if (!entry) return [];
   if (isDirectory(entry)) {
     const entries = await readDirectory(entry as FileSystemDirectoryEntry);
-    for (const e of entries) {
-      await getEntriesRecursively(e, collection, path + entry.name + "/");
-    }
+    await Promise.all(entries.map(e => getEntriesRecursively(e, collection, path + entry.name + "/")));
   } else {
     collection.push(entry as FileSystemFileEntry);
   }
