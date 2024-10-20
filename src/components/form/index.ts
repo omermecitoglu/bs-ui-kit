@@ -10,3 +10,4 @@ export { default as ProgressiveModalForm } from "./ProgressiveModalForm";
 export { default as Select } from "./Select";
 export { default as DatePicker } from "./DatePicker";
 export { default as SubmitButton } from "./SubmitButton";
+export { default as ImageUploader } from "./ImageUploader";
