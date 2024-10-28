@@ -1,10 +1,6 @@
-import { faXmark } from "@fortawesome/free-solid-svg-icons/faXmark";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import classNames from "classnames";
-import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import attach from "../styles/attach.module.css";
+import MiniDeleteButton from "./MiniDeleteButton";
 import ResponsiveBox from "./ResponsiveBox";
 
 /* eslint-disable jsx-a11y/img-redundant-alt */
@@ -35,16 +31,7 @@ const ImageList = ({
             height="600"
             className="w-100 h-100 bg-dark object-fit-cover border border-secondary rounded overflow-hidden"
           />
-          <Button
-            variant="danger"
-            size="sm"
-            className={classNames("position-absolute rounded-circle p-0 m-1", attach.toTopRight)}
-            onClick={() => onDelete(item)}
-          >
-            <div style={{ width: 16, height: 16, position: "relative" }}>
-              <FontAwesomeIcon icon={faXmark} className={classNames("fa-fw", attach.toCenter)} />
-            </div>
-          </Button>
+          <MiniDeleteButton onClick={() => onDelete(item)} />
         </ResponsiveBox>
       </Col>
     ))}
