@@ -7,6 +7,7 @@ import type { IconProp } from "@fortawesome/fontawesome-svg-core";
 import type { ButtonVariant } from "react-bootstrap/types";
 
 type ProgressiveModalFormProps = {
+  customButton?: (onClick: () => void) => ReactNode,
   buttonVariant?: ButtonVariant,
   buttonStretched?: boolean,
   buttonSize?: "lg" | "sm",
@@ -24,6 +25,7 @@ type ProgressiveModalFormProps = {
 };
 
 const ProgressiveModalForm = ({
+  customButton,
   buttonVariant = "primary",
   buttonStretched = false,
   buttonSize,
@@ -42,20 +44,24 @@ const ProgressiveModalForm = ({
   const [open, setOpen] = useState(false);
   return (
     <>
-      {buttonIcon ? (
-        <ActionButton
-          icon={buttonIcon}
-          text={buttonText}
-          variant={buttonVariant}
-          size={buttonSize}
-          onClick={() => setOpen(true)}
-          disabled={disabled}
-          stretched={buttonStretched}
-        />
-      ) : (
-        <Button variant={buttonVariant} onClick={() => setOpen(true)}>
-          {buttonText}
-        </Button>
+      {customButton ? customButton(() => setOpen(true)) : (
+        <>
+          {buttonIcon ? (
+            <ActionButton
+              icon={buttonIcon}
+              text={buttonText}
+              variant={buttonVariant}
+              size={buttonSize}
+              onClick={() => setOpen(true)}
+              disabled={disabled}
+              stretched={buttonStretched}
+            />
+          ) : (
+            <Button variant={buttonVariant} onClick={() => setOpen(true)}>
+              {buttonText}
+            </Button>
+          )}
+        </>
       )}
       <NewModalForm
         open={open}
