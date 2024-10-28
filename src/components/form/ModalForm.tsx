@@ -24,6 +24,9 @@ type ModalFormProps = {
   children: ReactNode,
 };
 
+/**
+ * @deprecated use ProgressiveModalForm instead
+ */
 const ModalForm = ({
   buttonVariant = "primary",
   buttonStretched = false,

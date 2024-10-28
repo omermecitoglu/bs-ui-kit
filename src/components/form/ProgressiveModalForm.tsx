@@ -1,10 +1,8 @@
 "use client";
 import { type ReactNode, useState } from "react";
 import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
 import ActionButton from "../ActionButton";
-import ProgressiveForm from "./ProgressiveForm";
-import SubmitButton from "./SubmitButton";
+import NewModalForm from "../modal/NewModalForm";
 import type { IconProp } from "@fortawesome/fontawesome-svg-core";
 import type { ButtonVariant } from "react-bootstrap/types";
 
@@ -42,12 +40,6 @@ const ProgressiveModalForm = ({
   children,
 }: ProgressiveModalFormProps) => {
   const [open, setOpen] = useState(false);
-  const handleFormStateChange = (newState: Record<string, string>) => {
-    if (onSuccess && Object.keys(newState).includes("[success]")) {
-      setOpen(false);
-      onSuccess();
-    }
-  };
   return (
     <>
       {buttonIcon ? (
@@ -65,24 +57,19 @@ const ProgressiveModalForm = ({
           {buttonText}
         </Button>
       )}
-      <Modal show={open} backdrop="static" onHide={() => setOpen(false)}>
-        <ProgressiveForm action={action} messages={messages} noGap onStateChange={handleFormStateChange}>
-          <Modal.Header closeButton>
-            <Modal.Title>{title}</Modal.Title>
-          </Modal.Header>
-          <Modal.Body className="d-flex flex-column gap-3">
-            {children}
-          </Modal.Body>
-          <Modal.Footer>
-            <SubmitButton variant={confirmVariant} text={confirmText} />
-            <ActionButton
-              variant="secondary"
-              text={cancelText}
-              onClick={() => setOpen(false)}
-            />
-          </Modal.Footer>
-        </ProgressiveForm>
-      </Modal>
+      <NewModalForm
+        open={open}
+        title={title}
+        action={action}
+        messages={messages}
+        confirmButtonVariant={confirmVariant}
+        confirmButtonText={confirmText}
+        cancelButtonText={cancelText}
+        onSuccess={onSuccess}
+        onHide={() => setOpen(false)}
+      >
+        {children}
+      </NewModalForm>
     </>
   );
 };
