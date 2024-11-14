@@ -31,12 +31,12 @@ export type DataTableProps<CI, K extends keyof CI, PK extends keyof CI> = {
   destroyCancelText: string,
   destroyDisabled: boolean | ((primaryKey: CI[PK]) => boolean),
 } | {
-  destroyAction?: undefined,
-  destroyWarningTitle?: undefined,
-  destroyWarningDescription?: undefined,
-  destroyConfirmText?: undefined,
-  destroyCancelText?: undefined,
-  destroyDisabled?: undefined,
+  destroyAction?: never,
+  destroyWarningTitle?: never,
+  destroyWarningDescription?: never,
+  destroyConfirmText?: never,
+  destroyCancelText?: never,
+  destroyDisabled?: never,
 });
 
 const DataTable = <CI extends Record<string, unknown>, K extends keyof CI, PK extends keyof CI>({
