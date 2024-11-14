@@ -19,6 +19,10 @@ export type DataTableProps<CI, K extends keyof CI, PK extends keyof CI> = {
   link: (props: LinkProps) => ReactNode,
   collection: CI[],
   primaryKey: PK,
+  /**
+   * Determines if the content within table cells should wrap
+   */
+  bodyWrap?: boolean,
   schema: {
     [CIK in K]: Column<CI, CIK, PK>;
   },
@@ -43,6 +47,7 @@ const DataTable = <CI extends Record<string, unknown>, K extends keyof CI, PK ex
   link: Link,
   collection,
   primaryKey,
+  bodyWrap = false,
   schema,
   editLink,
   destroyAction,
@@ -77,7 +82,7 @@ const DataTable = <CI extends Record<string, unknown>, K extends keyof CI, PK ex
           <th className="pt-0">&nbsp;</th>
         </tr>
       </thead>
-      <tbody className="text-nowrap">
+      <tbody className={classNames({ "text-nowrap": !bodyWrap })}>
         {collection.map(item => (
           <tr key={item[primaryKey] as string}>
             {Object.entries<Column<CI, K, PK>>(schema as unknown as ArrayLike<Column<CI, K, PK>>).map(([key, column]) => (
