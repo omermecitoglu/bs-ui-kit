@@ -9,6 +9,7 @@ type SubmitButtonProps = {
   icon?: IconProp,
   text: string,
   variant?: ButtonVariant,
+  size?: "sm" | "lg",
   stretched?: boolean,
   className?: string,
 };
@@ -17,6 +18,7 @@ const SubmitButton = ({
   icon = faCheck,
   text,
   variant = "primary",
+  size,
   stretched = false,
   className,
 }: SubmitButtonProps) => {
@@ -28,6 +30,7 @@ const SubmitButton = ({
       icon={icon}
       text={text}
       variant={variant}
+      size={size}
       spinning={pending}
       stretched={stretched}
       className={className}
