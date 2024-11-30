@@ -13,7 +13,7 @@ type SubmitButtonProps = {
   /**
    * The text will appear in the button
    */
-  text: string,
+  text?: string,
   /**
    * Color of the button
    */
