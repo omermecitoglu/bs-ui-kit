@@ -6,14 +6,35 @@ import type { IconProp } from "@fortawesome/fontawesome-svg-core";
 import type { ButtonVariant } from "react-bootstrap/types";
 
 type SubmitButtonProps = {
+  /**
+   * Font awesome icon that will appear in the button (defaults to check icon)
+   */
   icon?: IconProp,
+  /**
+   * The text will appear in the button
+   */
   text: string,
+  /**
+   * Color of the button
+   */
   variant?: ButtonVariant,
+  /**
+   * Size of the button
+   */
   size?: "sm" | "lg",
+  /**
+   * Is the button wide?
+   */
   stretched?: boolean,
+  /**
+   * Additional css class names
+   */
   className?: string,
 };
 
+/**
+ * Same as ActionButton but provides pending status via useFormStatus
+ */
 const SubmitButton = ({
   icon = faCheck,
   text,
