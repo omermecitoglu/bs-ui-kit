@@ -53,7 +53,7 @@ const ImageUploader = ({
       const filesToUpload = files.slice(0, Math.max(0, limit - uploadedFiles.length));
       const storedObjects = await Promise.all(filesToUpload.map(file => action(prepareFileForUpload(file))));
       setUploadedFiles(list => [...list, ...storedObjects].slice(0, limit));
-    } catch (error) {
+    } catch {
       alert("Something went wrong");
     } finally {
       setUploading(false);

@@ -23,7 +23,7 @@ export default function useLocalStorage<T = string>(key: string, initialValue: T
       const value = item && safeParseJSON<T>(item);
       return value || initialValue;
     },
-    () => initialValue
+    () => initialValue,
   );
 
   const setData = useCallback((value: T | null) => {
