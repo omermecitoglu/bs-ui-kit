@@ -109,12 +109,12 @@
     "postbuild": "copyfiles -f src/styles/* dist/styles"
   },
   "peerDependencies": {
-    "@fortawesome/fontawesome-svg-core": "^6.5.2",
-    "@fortawesome/free-brands-svg-icons": "^6.5.2",
-    "@fortawesome/free-solid-svg-icons": "^6.5.2",
+    "@fortawesome/fontawesome-svg-core": "^6",
+    "@fortawesome/free-brands-svg-icons": "^6",
+    "@fortawesome/free-solid-svg-icons": "^6",
     "@fortawesome/react-fontawesome": "^0.2.2",
-    "react-bootstrap": "^2.10.4",
-    "react-bootstrap-typeahead": "^6.3.2"
+    "react-bootstrap": "^2",
+    "react-bootstrap-typeahead": "^6"
   },
   "dependencies": {
     "change-case": "^5.4.4",
@@ -124,15 +124,15 @@
   },
   "devDependencies": {
     "@omer-x/eslint-config": "^2.1.1",
-    "@types/react": "^18.3.11",
-    "@types/react-dom": "^18.3.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
     "@types/vanillajs-datepicker": "^1.3.5",
     "copyfiles": "^2.4.1",
     "eslint": "^9.16.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-react": "^7.37.2",
-    "react-dom": "^18.3.1",
-    "semantic-release": "^24.1.2",
-    "typescript": "^5.6.3"
+    "react-dom": "^19.0.0",
+    "semantic-release": "^24.2.0",
+    "typescript": "^5.7.2"
   }
 }
