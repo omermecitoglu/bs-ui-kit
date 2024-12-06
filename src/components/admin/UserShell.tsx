@@ -26,7 +26,6 @@ const UserShell = <UT extends Record<string, unknown>>({
   }
   return (
     <Suspense fallback={pending}>
-      {/* @ts-expect-error Async Server Component */}
       <UserLoader
         loadUser={loadUser}
         success={success}
