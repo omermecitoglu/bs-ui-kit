@@ -1,9 +1,8 @@
 "use client";
 import classNames from "classnames";
-import { type ReactNode, useEffect, useState } from "react";
+import { type ReactNode, useActionState, useEffect, useState } from "react";
 import Alert from "react-bootstrap/Alert";
 import Form from "react-bootstrap/Form";
-import { useFormState } from "react-dom";
 import FormContext from "../../core/form-context";
 
 type FormWithStateProps = {
@@ -35,7 +34,7 @@ const FormWithState = ({
   children,
 }: FormWithStateProps) => {
   const [show, setShow] = useState(true);
-  const [formState, formAction] = useFormState(action, {});
+  const [formState, formAction, _isPending] = useActionState(action, {});
   useEffect(() => {
     if (onStateChange) {
       onStateChange(formState);
