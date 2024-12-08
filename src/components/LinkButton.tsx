@@ -15,6 +15,7 @@ type LinkButtonProps = {
   text?: string,
   disabled?: boolean,
   stretched?: boolean,
+  className?: string,
 };
 
 const LinkButton = ({
@@ -26,6 +27,7 @@ const LinkButton = ({
   text,
   disabled = false,
   stretched = false,
+  className,
 }: LinkButtonProps) => (
   disabled ? (
     <ActionButton
@@ -35,11 +37,12 @@ const LinkButton = ({
       text={text}
       disabled={disabled}
       stretched={stretched}
+      className={className}
     />
   ) : (
     <Link
       href={href}
-      className={classNames("btn", `btn-${variant}`, {
+      className={classNames(className, "btn", `btn-${variant}`, {
         "btn-sm": size === "sm",
         "btn-lg": size === "lg",
       })}
