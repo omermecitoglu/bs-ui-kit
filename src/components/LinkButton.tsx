@@ -11,6 +11,7 @@ type LinkButtonProps = {
   variant?: ButtonVariant,
   size?: "lg" | "sm",
   icon?: IconProp,
+  iconFlip?: "horizontal" | "vertical" | "both",
   href: string,
   text?: string,
   disabled?: boolean,
@@ -23,6 +24,7 @@ const LinkButton = ({
   variant = "primary",
   size,
   icon,
+  iconFlip,
   href,
   text,
   disabled = false,
@@ -34,6 +36,7 @@ const LinkButton = ({
       variant={variant}
       size={size}
       icon={icon}
+      iconFlip={iconFlip}
       text={text}
       disabled={disabled}
       stretched={stretched}
@@ -48,7 +51,15 @@ const LinkButton = ({
       })}
     >
       {icon && (
-        <FontAwesomeIcon size="lg" icon={icon} className="fa-fw" />
+        <FontAwesomeIcon
+          size="lg"
+          icon={icon}
+          className={classNames("fa-fw", {
+            "fa-flip-horizontal": iconFlip === "horizontal",
+            "fa-flip-vertical": iconFlip === "vertical",
+            "fa-flip-both": iconFlip === "both",
+          })}
+        />
       )}
       {text && (
         <span className={icon ? classNames("ms-2", stretched ? "me-4" : "me-2") : undefined}>

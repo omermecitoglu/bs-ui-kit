@@ -14,6 +14,7 @@ type ModalFormProps = {
   buttonStretched?: boolean,
   buttonSize?: "lg" | "sm",
   buttonIcon?: IconProp,
+  buttonIconFlip?: "horizontal" | "vertical" | "both",
   buttonText?: string,
   disabled?: boolean,
   title: string,
@@ -32,6 +33,7 @@ const ModalForm = ({
   buttonStretched = false,
   buttonSize,
   buttonIcon,
+  buttonIconFlip,
   buttonText,
   disabled = false,
   title,
@@ -47,6 +49,7 @@ const ModalForm = ({
       {buttonIcon ? (
         <ActionButton
           icon={buttonIcon}
+          iconFlip={buttonIconFlip}
           text={buttonText}
           variant={buttonVariant}
           size={buttonSize}

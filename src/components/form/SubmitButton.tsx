@@ -11,6 +11,10 @@ type SubmitButtonProps = {
    */
   icon?: IconProp,
   /**
+   * Flip mode of the icon
+   */
+  iconFlip?: "horizontal" | "vertical" | "both",
+  /**
    * The text will appear in the button
    */
   text?: string,
@@ -37,6 +41,7 @@ type SubmitButtonProps = {
  */
 const SubmitButton = ({
   icon = faCheck,
+  iconFlip,
   text,
   variant = "primary",
   size,
@@ -49,6 +54,7 @@ const SubmitButton = ({
     <ActionButton
       type="submit"
       icon={icon}
+      iconFlip={iconFlip}
       text={text}
       variant={variant}
       size={size}

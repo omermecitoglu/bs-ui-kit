@@ -9,6 +9,7 @@ type ActionButtonProps = {
   type?: "button" | "submit" | "reset",
   text?: string,
   icon?: IconProp,
+  iconFlip?: "horizontal" | "vertical" | "both",
   variant?: ButtonVariant,
   size?: "sm" | "lg",
   onClick?: () => void,
@@ -22,6 +23,7 @@ const ActionButton = ({
   type = "button",
   text,
   icon,
+  iconFlip,
   variant = "primary",
   size,
   onClick,
@@ -44,6 +46,9 @@ const ActionButton = ({
         icon={spinning ? faSpinner : icon}
         className={classNames("fa-fw", {
           "fa-spin": spinning,
+          "fa-flip-horizontal": iconFlip === "horizontal",
+          "fa-flip-vertical": iconFlip === "vertical",
+          "fa-flip-both": iconFlip === "both",
         })}
       />
     ) : (
