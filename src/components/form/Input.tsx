@@ -22,9 +22,7 @@ const Input = ({
   ...props
 }: InputProps & HtmlInputProps & InputWithFeedbackProps) => (
   <Group id={name}>
-    {label && (
-      <Label text={label} />
-    )}
+    {label && <Label text={label} />}
     {children}
     {(!!feedback || !!messages) ? (
       <InputWithFeedback name={name} messages={messages} {...props} />

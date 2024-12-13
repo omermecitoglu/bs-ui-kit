@@ -9,7 +9,7 @@ import Label from "./Label";
 
 type DatePickerProps = {
   name: string,
-  label: string,
+  label?: string,
   language: string,
   defaultValue?: string,
 };
@@ -41,7 +41,7 @@ const DatePicker = ({
 
   return (
     <Group id={name}>
-      <Label text={label} />
+      {label && <Label text={label} />}
       <FormControl
         ref={input}
         as="input"

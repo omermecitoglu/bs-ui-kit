@@ -16,7 +16,7 @@ type ValueProps<T> = {
 };
 
 type GroupedAdvancedSelectProps<OT, VK, LK, GK> = {
-  label: string,
+  label?: string,
   name: string,
   options: OT[],
   valueKey: VK,
@@ -73,7 +73,7 @@ const GroupedAdvancedSelect = <
 
   return (
     <Group id={name}>
-      <Label text={label} />
+      {label && <Label text={label} />}
       {selected.map((option, index) => (
         <input key={index} type="hidden" name={props.multiple ? `${name}[]` : name} value={option[valueKey] as string} />
       ))}

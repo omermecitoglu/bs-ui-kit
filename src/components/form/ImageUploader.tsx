@@ -72,9 +72,7 @@ const ImageUploader = ({
 
   return (
     <Group id={name}>
-      {label && (
-        <Label text={label} />
-      )}
+      {label && <Label text={label} />}
       {uploadedFiles.map(file => (
         <input key={file} type="hidden" name={`${name}[]`} value={file} />
       ))}

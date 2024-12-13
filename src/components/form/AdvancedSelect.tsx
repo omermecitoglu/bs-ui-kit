@@ -15,7 +15,7 @@ type ValueProps<T> = {
 };
 
 type AdvancedSelectProps<OT, VK, LK> = {
-  label: string,
+  label?: string,
   name: string,
   options: OT[],
   valueKey: VK,
@@ -67,7 +67,7 @@ const AdvancedSelect = <
 
   return (
     <Group id={name}>
-      <Label text={label} />
+      {label && <Label text={label} />}
       {selected.map((option, index) => (
         <input key={index} type="hidden" name={props.multiple ? `${name}[]` : name} value={option[valueKey] as string} />
       ))}

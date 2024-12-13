@@ -3,7 +3,7 @@ import Group from "./Group";
 import Label from "./Label";
 
 type SelectProps<Option> = {
-  label: string,
+  label?: string,
   name: string,
   options: Option[],
   optionName?: (option: Option) => string,
@@ -22,7 +22,7 @@ const Select = <Option extends string>({
   onChange,
 }: SelectProps<Option>) => (
   <Group id={name}>
-    <Label text={label} />
+    {label && <Label text={label} />}
     <FormSelect
       name={name}
       defaultValue={defaultValue}
