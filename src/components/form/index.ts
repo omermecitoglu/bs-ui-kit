@@ -9,5 +9,6 @@ export { default as ModalForm } from "./ModalForm";
 export { default as ProgressiveModalForm } from "./ProgressiveModalForm";
 export { default as Select } from "./Select";
 export { default as DatePicker } from "./DatePicker";
+export { default as BetterDatePicker } from "./BetterDatePicker";
 export { default as SubmitButton } from "./SubmitButton";
 export { default as ImageUploader } from "./ImageUploader";
