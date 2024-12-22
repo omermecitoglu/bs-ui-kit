@@ -14,6 +14,9 @@ type DatePickerProps = {
   defaultValue?: string,
 };
 
+/**
+ * @deprecated use BetterDatePicker instead
+ */
 const DatePicker = ({
   name,
   label,
