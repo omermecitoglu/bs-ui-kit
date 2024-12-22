@@ -1,11 +1,12 @@
 "use client";
-import { useContext } from "react";
+import { type RefObject, useContext } from "react";
 import Feedback from "react-bootstrap/Feedback";
 import FormContext from "../../core/form-context";
 import { findError } from "../../utils/form";
 import SimpleInput, { type HtmlInputProps } from "./SimpleInput";
 
 export type InputWithFeedbackProps = {
+  ref?: RefObject<HTMLInputElement | null>,
   messages?: Record<string, string | undefined>,
 };
 

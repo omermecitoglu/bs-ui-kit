@@ -7,6 +7,7 @@ export type HtmlInputProps = {
   placeholder?: string,
   required?: boolean,
   autoFocus?: boolean,
+  onFocus?: () => void,
   readOnly?: boolean,
 } & ({
   type?: "text" | "email" | "password",
