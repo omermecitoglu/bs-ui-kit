@@ -5,7 +5,6 @@ import SimpleInput, { type HtmlInputProps } from "./SimpleInput";
 import type { ReactNode } from "react";
 
 export type InputProps = {
-  name: string,
   label?: string,
   /**
    * @deprecated This prop is deprecated and will be removed in future versions.
