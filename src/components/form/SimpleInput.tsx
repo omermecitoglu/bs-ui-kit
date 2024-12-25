@@ -1,7 +1,7 @@
 import FormControl from "react-bootstrap/FormControl";
 
 export type HtmlInputProps = {
-  name: string,
+  name?: string,
   autoComplete?: "username" | "name" | "email" | "current-password" | "new-password" | "off",
   lines?: number,
   placeholder?: string,

@@ -19,6 +19,7 @@ import Label from "./Label";
 import SimpleInput, { type HtmlInputProps } from "./SimpleInput";
 
 type BetterDatePickerProps = {
+  name: string,
   label?: string,
   locale: string,
   defaultValue?: string,
@@ -128,7 +129,6 @@ const BetterDatePicker = ({
         {messages ? (
           <InputWithFeedback
             ref={inputRef}
-            name={name}
             messages={messages}
             {...props}
             value={formatDate(selectedDate.toISOString(), locale)}
@@ -138,13 +138,13 @@ const BetterDatePicker = ({
         ) : (
           <SimpleInput
             ref={inputRef}
-            name={name}
             {...props}
             value={formatDate(selectedDate.toISOString(), locale)}
             readOnly
             onFocus={() => setIsShowingPopup(true)}
           />
         )}
+        <input type="hidden" name={name} value={selectedDate.toISOString()} />
         <div ref={popupContainer} className="position-absolute top-0 bottom-0 start-0 end-0 pe-none" />
       </div>
       <Overlay
@@ -200,7 +200,6 @@ const BetterDatePicker = ({
                   <div className="d-grid gap-3">
                     <SimpleInput
                       autoFocus
-                      name="date-picker-choose-year"
                       value={`${displayedMonth.getFullYear() || ""}`}
                       onChange={e => updateDisplayedYear(e.target.value)}
                     />

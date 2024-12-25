@@ -16,7 +16,7 @@ const InputWithFeedback = ({
   ...props
 }: HtmlInputProps & InputWithFeedbackProps) => {
   const context = useContext(FormContext);
-  const inputError = findError(context.errors, name);
+  const inputError = name ? findError(context.errors, name) : undefined;
   return (
     <>
       <SimpleInput
