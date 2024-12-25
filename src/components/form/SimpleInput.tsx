@@ -21,8 +21,8 @@ export type HtmlInputProps = {
   onChange?: React.ChangeEventHandler<HTMLInputElement>,
 } | {
   defaultValue?: string,
-  value: never,
-  displayValue: never,
+  value?: never,
+  displayValue?: never,
 });
 
 type SimpleInputProps = {
