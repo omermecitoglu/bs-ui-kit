@@ -21,6 +21,10 @@ type ProgressiveModalFormProps = {
   confirmVariant?: ButtonVariant,
   confirmText: string,
   cancelText: string,
+  /**
+   * Modal has a default behavior of enforcing focus in React Bootstrap, this prop can disable that
+   */
+  disableEnforcedFocus?: boolean,
   onSuccess?: () => void,
   children: ReactNode,
 };
@@ -40,6 +44,7 @@ const ProgressiveModalForm = ({
   confirmVariant = "primary",
   confirmText,
   cancelText,
+  disableEnforcedFocus = false,
   onSuccess,
   children,
 }: ProgressiveModalFormProps) => {
@@ -74,6 +79,7 @@ const ProgressiveModalForm = ({
         confirmButtonVariant={confirmVariant}
         confirmButtonText={confirmText}
         cancelButtonText={cancelText}
+        disableEnforcedFocus={disableEnforcedFocus}
         onSuccess={onSuccess}
         onHide={() => setOpen(false)}
       >

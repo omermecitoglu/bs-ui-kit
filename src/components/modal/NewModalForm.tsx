@@ -13,6 +13,10 @@ type NewModalFormProps = {
   confirmButtonVariant?: ButtonVariant,
   confirmButtonText: string,
   cancelButtonText: string,
+  /**
+   * Modal has a default behavior of enforcing focus in React Bootstrap, this prop can disable that
+   */
+  disableEnforcedFocus?: boolean,
   onSuccess?: () => void,
   onHide: () => void,
   children: ReactNode,
@@ -26,6 +30,7 @@ const NewModalForm = ({
   confirmButtonVariant = "primary",
   confirmButtonText,
   cancelButtonText,
+  disableEnforcedFocus = false,
   onSuccess,
   onHide,
   children,
@@ -37,7 +42,7 @@ const NewModalForm = ({
     }
   };
   return (
-    <Modal show={open} backdrop="static" onHide={onHide}>
+    <Modal show={open} backdrop="static" onHide={onHide} enforceFocus={!disableEnforcedFocus}>
       <ProgressiveForm action={action} messages={messages} noGap onStateChange={handleFormStateChange}>
         <Modal.Header closeButton>
           <Modal.Title>{title}</Modal.Title>
