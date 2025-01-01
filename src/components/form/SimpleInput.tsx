@@ -55,7 +55,7 @@ const SimpleInput = ({
           <FormControl
             type={type}
             value={value}
-            name={value}
+            name={name}
             {...props}
             as="textarea"
             rows={lines}
