@@ -3,7 +3,7 @@ import classNames from "classnames";
 import ActionButton from "./ActionButton";
 import type { LinkProps } from "../types/link";
 import type { IconProp } from "@fortawesome/fontawesome-svg-core";
-import type { ReactNode } from "react";
+import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import type { ButtonVariant } from "react-bootstrap/types";
 
 type LinkButtonProps = {
@@ -17,7 +17,7 @@ type LinkButtonProps = {
   disabled?: boolean,
   stretched?: boolean,
   className?: string,
-};
+} & Omit<ComponentPropsWithoutRef<"a">, "children">;
 
 const LinkButton = ({
   as: Link,
@@ -30,6 +30,7 @@ const LinkButton = ({
   disabled = false,
   stretched = false,
   className,
+  ...otherProps
 }: LinkButtonProps) => (
   disabled ? (
     <ActionButton
@@ -49,6 +50,7 @@ const LinkButton = ({
         "btn-sm": size === "sm",
         "btn-lg": size === "lg",
       })}
+      {...otherProps}
     >
       {icon && (
         <FontAwesomeIcon
