@@ -6,7 +6,7 @@ import Form from "react-bootstrap/Form";
 import FormContext from "../../core/form-context";
 
 type FormWithStateProps = {
-  action: (_: unknown, formData: FormData) => Promise<Record<string, string>>,
+  action: (_: unknown, formData: FormData) => Promise<Record<string, string> | undefined>,
   messages?: Record<string, string | undefined>,
   hideAfterPost?: boolean,
   /**
@@ -37,7 +37,7 @@ const FormWithState = ({
   const [formState, formAction, _isPending] = useActionState(action, {});
   useEffect(() => {
     if (onStateChange) {
-      onStateChange(formState);
+      onStateChange(formState ?? {});
     }
     setShow(true);
   }, [formState]);
@@ -45,28 +45,28 @@ const FormWithState = ({
 
   return (
     <>
-      {show && formState["[success]"] && (
+      {show && formState && formState["[success]"] && (
         <Alert variant="success" onClose={dismiss} dismissible={!hideAfterPost}>
           {messages[formState["[success]"]] ?? formState["[success]"]}
         </Alert>
       )}
-      {show && formState["[danger]"] && (
+      {show && formState && formState["[danger]"] && (
         <Alert variant="danger" onClose={dismiss} dismissible>
           {messages[formState["[danger]"]] ?? formState["[danger]"]}
         </Alert>
       )}
-      {show && formState["[warning]"] && (
+      {show && formState && formState["[warning]"] && (
         <Alert variant="warning" onClose={dismiss} dismissible>
           {messages[formState["[warning]"]] ?? formState["[warning]"]}
         </Alert>
       )}
-      {show && formState["[info]"] && (
+      {show && formState && formState["[info]"] && (
         <Alert variant="info" onClose={dismiss} dismissible>
           {messages[formState["[info]"]] ?? formState["[info]"]}
         </Alert>
       )}
-      <FormContext.Provider value={{ errors: formState, messages }}>
-        {hideAfterPost && formState["[success]"] ? false : (
+      <FormContext.Provider value={{ errors: formState ?? {}, messages }}>
+        {hideAfterPost && formState && formState["[success]"] ? false : (
           <Form
             action={formAction as unknown as string}
             className={classNames("d-flex flex-column", !noGap && "gap-3", className)}
