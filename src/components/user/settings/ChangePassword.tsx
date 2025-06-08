@@ -12,6 +12,8 @@ type ChangePasswordProps = {
   emailLabel: string,
   emailKey?: string,
   emailValue: string,
+  currentPasswordLabel?: string,
+  currentPasswordKey?: string,
   newPasswordLabel: string,
   newPasswordKey: string,
   confirmButtonText: string,
@@ -26,6 +28,8 @@ const ChangePassword = ({
   emailLabel,
   emailKey = "username",
   emailValue,
+  currentPasswordLabel,
+  currentPasswordKey,
   newPasswordLabel,
   newPasswordKey,
   confirmButtonText,
@@ -54,12 +58,21 @@ const ChangePassword = ({
             readOnly
           />
         </Group>
+        {currentPasswordLabel && currentPasswordKey && (
+          <Input
+            label={currentPasswordLabel}
+            type="password"
+            name={currentPasswordKey}
+            autoComplete="current-password"
+            autoFocus
+          />
+        )}
         <Input
           label={newPasswordLabel}
           type="password"
           name={newPasswordKey}
           autoComplete="new-password"
-          autoFocus
+          autoFocus={!currentPasswordLabel || !currentPasswordKey}
         />
       </ModalForm>
     </InputGroup>
