@@ -16,6 +16,7 @@ type RegistrationFormProps = {
   terms: ReactNode,
   loginSuggestion: ReactNode,
   commonExceptions?: Record<string, string>,
+  displayNameExceptions?: Record<string, string>,
   emailExceptions?: Record<string, string>,
 };
 
@@ -32,6 +33,7 @@ const RegistrationForm = ({
   terms,
   loginSuggestion,
   commonExceptions,
+  displayNameExceptions,
   emailExceptions,
 }: RegistrationFormProps) => (
   <>
@@ -42,6 +44,7 @@ const RegistrationForm = ({
         type="text"
         name={displayNameKey}
         autoComplete="name"
+        messages={displayNameExceptions}
         required
         autoFocus
       />
