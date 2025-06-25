@@ -6,6 +6,10 @@ function handleZodIssue(issue: ZodIssue) {
       return issue.params?.customErrorCode ?? issue.message;
     case ZodIssueCode.invalid_string:
       return `invalid_${issue.validation}`;
+    case ZodIssueCode.too_small:
+      return "too_small";
+    case ZodIssueCode.too_big:
+      return "too_big";
     default:
       return "unknown_error";
   }
