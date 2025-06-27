@@ -18,6 +18,10 @@ type PropertyDefinition<
    */
   label: string,
   /**
+   * Validation error messages for the input field.
+   */
+  messages?: Record<string, string>,
+  /**
    * Additional class names for the default input component.
    */
   className?: string,
@@ -127,6 +131,7 @@ const SmartForm = <
                 label={propertyDefinition.label}
                 schema={schema.shape[propertyName]}
                 defaultValue={(defaultValues ?? {})[propertyName]}
+                messages={propertyDefinition.messages}
                 className={propertyDefinition.className}
               />
             )}

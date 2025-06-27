@@ -17,6 +17,8 @@ type SmartInputProps = SmartFormValidations & {
   defaultValue?: unknown,
   /** Placeholder text for the input field. */
   placeholder?: string,
+  /** Validation error messages for the input field. */
+  messages?: Record<string, string>,
   /** Optional class name for the input element. */
   className?: string,
 };
@@ -49,6 +51,7 @@ const SmartInput = (props: SmartInputProps): ReactNode => {
           required={props.isRequired}
           minLength={props.minLength}
           maxLength={props.maxLength}
+          messages={props.messages}
           className={props.className}
         />
       );
@@ -63,6 +66,7 @@ const SmartInput = (props: SmartInputProps): ReactNode => {
           required={props.isRequired}
           min={props.greaterThan}
           max={props.lessThan}
+          messages={props.messages}
           className={props.className}
         />
       );
