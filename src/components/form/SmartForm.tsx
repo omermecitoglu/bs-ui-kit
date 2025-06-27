@@ -87,7 +87,7 @@ const SmartForm = <
               <>
                 {propertyDefinition.customComponent(
                   getValidations(
-                    schema._zod.def.checks,
+                    schema.shape[propertyName]._zod.def.checks,
                     propertyDefinition.required ?? (
                       !schema.shape[propertyName].safeParse(undefined).success ||
                       !schema.shape[propertyName].safeParse(null).success
@@ -99,7 +99,7 @@ const SmartForm = <
             ) : (
               <SmartInput
                 {...getValidations(
-                  schema._zod.def.checks,
+                  schema.shape[propertyName]._zod.def.checks,
                   propertyDefinition.required ?? (
                     !schema.shape[propertyName].safeParse(undefined).success ||
                     !schema.shape[propertyName].safeParse(null).success
