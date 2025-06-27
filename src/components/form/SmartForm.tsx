@@ -11,6 +11,7 @@ import type { ZodObject, ZodType } from "zod/v4";
 type PropertyDefinition<
   Shape extends Record<string, ZodType>,
   Key extends keyof Shape,
+  DefaultValue = unknown,
 > = ({
   /**
    * The label to display for the form field.
@@ -24,7 +25,11 @@ type PropertyDefinition<
   /**
    * Optional custom component to render for this field. Receives validation rules and the Zod schema for the field.
    */
-  customComponent: (validations: SmartFormValidations, zodSchema: Shape[Key]) => ReactNode,
+  customComponent: (
+    defaultValue: DefaultValue,
+    validations: SmartFormValidations,
+    zodSchema: Shape[Key],
+  ) => ReactNode,
 }) & {
   /**
    * Whether this field is required.
@@ -46,16 +51,25 @@ type PropertyDefinition<
 /**
  * Props for the SmartForm component.
  */
-type SmartFormProps<Shape extends Record<string, ZodType>, Keys extends keyof Shape> = {
+type SmartFormProps<
+  Shape extends Record<string, ZodType>,
+  Keys extends keyof Shape,
+  Input,
+  Output extends Record<Keys, unknown>,
+> = {
   /**
    * The Zod object schema describing the form fields.
    */
-  schema: ZodObject<Shape>,
+  schema: ZodObject<Shape> & ZodType<Output, Input>,
+  /**
+   * Default values for the form fields. If not provided, fields will be initialized with their schema defaults.
+   */
+  defaultValues?: NoInfer<Input>,
   /**
    * Property definitions for each field to render in the form.
    */
   properties: {
-    [PropKey in Keys]: PropertyDefinition<Shape, PropKey>;
+    [PropKey in Keys]: PropertyDefinition<Shape, PropKey, Partial<NoInfer<Output>>[PropKey]>;
   },
 };
 
@@ -65,10 +79,13 @@ type SmartFormProps<Shape extends Record<string, ZodType>, Keys extends keyof Sh
 const SmartForm = <
   Shape extends Record<string, ZodType>,
   ShapeKeys extends keyof Shape,
+  Input,
+  Output extends Record<ShapeKeys, unknown>,
 >({
   schema,
+  defaultValues,
   properties,
-}: SmartFormProps<Shape, ShapeKeys>) => {
+}: SmartFormProps<Shape, ShapeKeys, Input, Output>) => {
   const entries = Object.entries(properties as ArrayLike<PropertyDefinition<Shape, ShapeKeys>>);
   return (
     <>
@@ -86,6 +103,7 @@ const SmartForm = <
             {"customComponent" in propertyDefinition ? (
               <>
                 {propertyDefinition.customComponent(
+                  (defaultValues ?? {})[propertyName],
                   getValidations(
                     schema.shape[propertyName]._zod.def.checks,
                     propertyDefinition.required ?? (
@@ -108,6 +126,7 @@ const SmartForm = <
                 name={propertyName}
                 label={propertyDefinition.label}
                 schema={schema.shape[propertyName]}
+                defaultValue={(defaultValues ?? {})[propertyName]}
                 className={propertyDefinition.className}
               />
             )}
