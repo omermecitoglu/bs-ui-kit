@@ -2,7 +2,7 @@ import Group from "./Group";
 import InputWithFeedback, { type InputWithFeedbackProps } from "./InputWithFeedback";
 import Label from "./Label";
 import SimpleInput, { type HtmlInputProps } from "./SimpleInput";
-import type { ReactNode } from "react";
+import type { ComponentProps, ReactNode } from "react";
 
 export type InputProps = {
   label?: string,
@@ -20,7 +20,7 @@ const Input = ({
   messages,
   children,
   ...props
-}: InputProps & HtmlInputProps & InputWithFeedbackProps) => (
+}: InputProps & HtmlInputProps & ComponentProps<"input"> & InputWithFeedbackProps) => (
   <Group id={name}>
     {label && <Label text={label} />}
     {children}

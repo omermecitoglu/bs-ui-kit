@@ -10,7 +10,7 @@ export type HtmlInputProps = {
   onFocus?: () => void,
   readOnly?: boolean,
 } & ({
-  type?: "text" | "email" | "password",
+  type?: "text" | "email" | "url" | "password",
 } | {
   type: "number",
   min?: number,
