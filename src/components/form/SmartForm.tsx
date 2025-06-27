@@ -11,11 +11,21 @@ import type { ZodObject, ZodType } from "zod/v4";
 type PropertyDefinition<
   Shape extends Record<string, ZodType>,
   Key extends keyof Shape,
-> = {
+> = ({
   /**
    * The label to display for the form field.
    */
   label: string,
+  /**
+   * Additional class names for the default input component.
+   */
+  className?: string,
+} | {
+  /**
+   * Optional custom component to render for this field. Receives validation rules and the Zod schema for the field.
+   */
+  customComponent: (validations: SmartFormValidations, zodSchema: Shape[Key]) => ReactNode,
+}) & {
   /**
    * Whether this field is required.
    */
@@ -31,17 +41,7 @@ type PropertyDefinition<
     xl?: number,
     xxl?: number,
   },
-} & ({
-  /**
-   * Optional custom component to render for this field. Receives validation rules and the Zod schema for the field.
-   */
-  customComponent: (validations: SmartFormValidations, zodSchema: Shape[Key]) => ReactNode,
-} | {
-  /**
-   * Additional class names for the default input component.
-   */
-  className?: string,
-});
+};
 
 /**
  * Props for the SmartForm component.
