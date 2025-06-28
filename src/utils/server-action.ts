@@ -10,6 +10,10 @@ type ActionDefinition<Name, Shape extends Record<string, ZodType>, SchemaI, Sche
    */
   name: Name,
   /**
+   * An array of middleware functions to execute before the action. (Optional)
+   */
+  middlewares?: (() => void | Promise<void>)[],
+  /**
    * The Zod schema used to validate form data.
    */
   schema: ZodType<SchemaO, SchemaI> & ZodObject<Shape>,
@@ -24,6 +28,7 @@ type ActionDefinition<Name, Shape extends Record<string, ZodType>, SchemaI, Sche
  *
  * @param definition - The form action definition object.
  * @param definition.name - The unique name of the action.
+ * @param definition.middleware - An array of middleware functions to execute before the action. (Optional)
  * @param definition.schema - The Zod schema used to validate form data.
  * @param definition.action - The function to execute if validation succeeds.
  * @returns An object containing the server action handler keyed by the action name.
@@ -36,6 +41,10 @@ export function defineFormAction<
   Args extends unknown[],
 >(definition: ActionDefinition<Name, Shape, SchemaI, SchemaO, Args>) {
   async function handler(...allParams: [...Args, initialState: unknown, formData: FormData]) {
+    if (definition.middlewares) {
+      await Promise.all(definition.middlewares.map(middleware => middleware()));
+    }
+
     const formData = allParams[allParams.length - 1] as FormData;
     const customArgs = allParams.slice(0, allParams.length - 2) as Args;
 
