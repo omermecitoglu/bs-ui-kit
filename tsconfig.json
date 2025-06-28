@@ -22,6 +22,7 @@
     "src/index.ts",
     "src/utils/zod.ts",
     "src/utils/form-data.ts",
+    "src/utils/server-action.ts",
   ],
   "exclude": ["node_modules", "dist"],
 }

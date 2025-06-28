@@ -94,6 +94,10 @@
       "import": "./dist/utils/form-data.js",
       "types": "./dist/utils/form-data.d.ts"
     },
+    "./server-action": {
+      "import": "./dist/utils/server-action.js",
+      "types": "./dist/utils/server-action.d.ts"
+    },
     "./*": {
       "import": "./dist/components/*.js",
       "types": "./dist/components/*.d.ts"
