@@ -1,11 +1,15 @@
 "use client";
 import { faFolderOpen } from "@fortawesome/free-solid-svg-icons/faFolderOpen";
-import { useRef, useState } from "react";
+import classNames from "classnames";
+import { useContext, useRef, useState } from "react";
+import Feedback from "react-bootstrap/Feedback";
 import ActionButton from "../ActionButton";
 import FileBasket from "../FileBasket";
 import ImageList from "../ImageList";
 import Group from "./Group";
 import Label from "./Label";
+import FormContext from "../../core/form-context";
+import { findError } from "../../utils/form";
 
 type ImageUploaderProps = {
   label?: string,
@@ -18,6 +22,7 @@ type ImageUploaderProps = {
   droppable?: boolean,
   dropCTA?: string,
   defaultValue?: string[],
+  messages?: Partial<Record<string, string>>,
 };
 
 const ImageUploader = ({
@@ -31,10 +36,13 @@ const ImageUploader = ({
   droppable = false,
   dropCTA,
   defaultValue = [],
+  messages = {},
 }: ImageUploaderProps) => {
   const fileInput = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
   const [uploadedFiles, setUploadedFiles] = useState<string[]>(defaultValue);
+  const context = useContext(FormContext);
+    const inputError = findError(context.errors, name);
 
   const openFileBrowser = () => {
     if (!fileInput.current) return;
@@ -74,7 +82,7 @@ const ImageUploader = ({
     <Group id={name}>
       {label && <Label text={label} />}
       {uploadedFiles.map(file => (
-        <input key={file} type="hidden" name={`${name}[]`} value={file} />
+        <input key={file} type="hidden" name={limit === 1 ? name : `${name}[]`} value={file} />
       ))}
       <input
         ref={fileInput}
@@ -92,9 +100,17 @@ const ImageUploader = ({
           onClick={openFileBrowser}
           spinning={uploading}
           disabled={uploadedFiles.length >= limit}
+          className={classNames({
+            "border border-danger": !!inputError,
+          })}
           stretched
         />
       </div>
+      {inputError && (
+        <Feedback type="invalid" className="d-block">
+          {messages[inputError] ?? context.messages[inputError] ?? inputError}
+        </Feedback>
+      )}
       {uploadedFiles.length > 0 && (
         <ImageList
           collection={uploadedFiles}
