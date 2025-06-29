@@ -1,10 +1,10 @@
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons/faTrashCan";
-import ModalForm from "./form/ModalForm";
+import ProgressiveModalForm from "./form/ProgressiveModalForm";
 
 type DeleteButtonProps = {
   title: string,
   description: string,
-  action: (formData: FormData) => void,
+  action: (initialState: unknown, formData: FormData) => Promise<Record<string, string>>,
   confirmText: string,
   cancelText: string,
   disabled?: boolean,
@@ -18,7 +18,7 @@ const DeleteButton = ({
   cancelText,
   disabled = false,
 }: DeleteButtonProps) => (
-  <ModalForm
+  <ProgressiveModalForm
     buttonIcon={faTrashCan}
     buttonSize="sm"
     buttonVariant="outline-danger"
@@ -30,7 +30,7 @@ const DeleteButton = ({
     cancelText={cancelText}
   >
     {description}
-  </ModalForm>
+  </ProgressiveModalForm>
 );
 
 export default DeleteButton;

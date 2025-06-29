@@ -28,7 +28,7 @@ export type DataTableProps<CI, K extends keyof CI, PK extends keyof CI> = {
   },
   editLink?: (primaryKey: CI[PK]) => string,
 } & ({
-  destroyAction: (primaryKey: CI[PK], formData: FormData) => void,
+  destroyAction: (primaryKey: CI[PK], initialState: unknown, formData: FormData) => Promise<Record<string, string>>,
   destroyWarningTitle: string,
   destroyWarningDescription: string,
   destroyConfirmText: string,
