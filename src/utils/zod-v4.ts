@@ -16,6 +16,12 @@ function handleZodIssue(issue: $ZodIssue) {
     }
     case "invalid_format":
       return `invalid_${issue.format}`; // e.g., INVALID_EMAIL, INVALID_URL, INVALID_UUID
+    case "invalid_type": {
+      if ((/expected .+?, received undefined/).test(issue.message)) {
+        return "required";
+      }
+      return issue.code;
+    }
     case "too_small":
     case "too_big":
       return issue.code; // known errors
