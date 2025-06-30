@@ -1,5 +1,5 @@
 import { bundleErrors } from "./zod-v4";
-import type { ZodObject, ZodType } from "zod/v4";
+import type { ZodObject, ZodSafeParseResult, ZodType } from "zod/v4";
 
 /**
  * Describes the definition of a type-safe server action for forms.
@@ -48,11 +48,34 @@ export function defineFormAction<
     const formData = allParams[allParams.length - 1] as FormData;
     const customArgs = allParams.slice(0, allParams.length - 2) as Args;
 
-    const validation = definition.schema.strip().safeParse(Object.fromEntries(formData.entries()));
+    const validation = solveKnownIssues(definition.schema.strip(), Object.fromEntries(formData.entries()));
     if (!validation.success) {
       return bundleErrors(validation.error.issues);
     }
     return await definition.action(validation.data as SchemaO)(...customArgs);
   }
   return { [definition.name]: handler } as Record<Name, typeof handler>;
+}
+
+function solveKnownIssues<T extends Record<string, unknown>>(
+  schema: ZodType<T>,
+  input: Record<string, unknown>,
+): ZodSafeParseResult<T> {
+  const validation = schema.safeParse(input);
+  if (!validation.success) {
+    for (const issue of validation.error.issues) {
+      if (issue.code === "invalid_type") {
+        if (issue.expected === "number" && issue.message.includes("expected number, received string")) {
+          const [location] = issue.path;
+          if (location in input) {
+            return solveKnownIssues(schema, {
+              ...input,
+              [location]: parseFloat(input[location as string] as string),
+            });
+          }
+        }
+      }
+    }
+  }
+  return validation;
 }
