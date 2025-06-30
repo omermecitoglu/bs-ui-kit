@@ -54,7 +54,9 @@ export function defineFormAction<
     }
     return await definition.action(validation.data as SchemaO)(...customArgs);
   }
-  return { [definition.name]: handler } as Record<Name, typeof handler>;
+  return {
+    [definition.name]: handler,
+  } as Record<Name, (...allParams: [...Args, initialState: unknown, formData: FormData]) => Promise<Record<string, string>>>;
 }
 
 function solveKnownIssues<T extends Record<string, unknown>>(
