@@ -26,6 +26,7 @@ type ProgressiveModalFormProps = {
    */
   disableEnforcedFocus?: boolean,
   onSuccess?: () => void,
+  closeOnSuccess?: boolean,
   children: ReactNode,
 };
 
@@ -46,6 +47,7 @@ const ProgressiveModalForm = ({
   cancelText,
   disableEnforcedFocus = false,
   onSuccess,
+  closeOnSuccess = false,
   children,
 }: ProgressiveModalFormProps) => {
   const [open, setOpen] = useState(false);
@@ -81,6 +83,7 @@ const ProgressiveModalForm = ({
         cancelButtonText={cancelText}
         disableEnforcedFocus={disableEnforcedFocus}
         onSuccess={onSuccess}
+        closeOnSuccess={closeOnSuccess}
         onHide={() => setOpen(false)}
       >
         {children}

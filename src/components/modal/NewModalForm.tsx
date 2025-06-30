@@ -18,6 +18,7 @@ type NewModalFormProps = {
    */
   disableEnforcedFocus?: boolean,
   onSuccess?: () => void,
+  closeOnSuccess?: boolean,
   onHide: () => void,
   children: ReactNode,
 };
@@ -32,13 +33,14 @@ const NewModalForm = ({
   cancelButtonText,
   disableEnforcedFocus = false,
   onSuccess,
+  closeOnSuccess,
   onHide,
   children,
 }: NewModalFormProps) => {
   const handleFormStateChange = (newState: Record<string, string>) => {
-    if (onSuccess && Object.keys(newState).includes("[success]")) {
+    if (closeOnSuccess && Object.keys(newState).includes("[success]")) {
       onHide();
-      onSuccess();
+      if (onSuccess) onSuccess();
     }
   };
   return (

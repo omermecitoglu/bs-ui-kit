@@ -20,7 +20,7 @@ type ActionDefinition<Name, Shape extends Record<string, ZodType>, SchemaI, Sche
   /**
    * The function to execute if validation succeeds. Receives parsed data and returns a function for additional arguments.
    */
-  action: (input: SchemaO) => ((...args: [...Args]) => Promise<Record<string, string>>),
+  action: (input: SchemaO) => ((...args: [...Args]) => Promise<Partial<Record<string, string>>>),
 };
 
 /**
