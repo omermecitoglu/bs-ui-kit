@@ -59,7 +59,7 @@ type SmartFormProps<
   Shape extends Record<string, ZodType>,
   Keys extends keyof Shape,
   Input,
-  Output extends Record<Keys, unknown>,
+  Output extends Partial<Record<Keys, unknown>>,
 > = {
   /**
    * The Zod object schema describing the form fields.
@@ -84,7 +84,7 @@ const SmartForm = <
   Shape extends Record<string, ZodType>,
   ShapeKeys extends keyof Shape,
   Input,
-  Output extends Record<ShapeKeys, unknown>,
+  Output extends Partial<Record<ShapeKeys, unknown>>,
 >({
   schema,
   defaultValues,
