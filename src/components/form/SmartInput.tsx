@@ -35,6 +35,9 @@ const SmartInput = (props: SmartInputProps): ReactNode => {
   };
 
   switch (props.schema._zod.def.type) {
+    case "optional": {
+      return <SmartInput {...props} schema={unwrap(props.schema)} />;
+    }
     case "default": {
       return (
         <SmartInput
