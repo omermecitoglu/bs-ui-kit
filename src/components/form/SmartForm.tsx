@@ -25,6 +25,10 @@ type PropertyDefinition<
    * Additional class names for the default input component.
    */
   className?: string,
+  /**
+   * Number of lines (only for strings)
+   */
+  lines?: number,
 } | {
   /**
    * Optional custom component to render for this field. Receives validation rules and the Zod schema for the field.
@@ -132,6 +136,7 @@ const SmartForm = <
                 schema={schema.shape[propertyName]}
                 defaultValue={(defaultValues ?? {})[propertyName]}
                 messages={propertyDefinition.messages}
+                lines={propertyDefinition.lines}
                 className={propertyDefinition.className}
               />
             )}
