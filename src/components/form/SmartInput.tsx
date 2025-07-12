@@ -27,18 +27,22 @@ type SmartInputProps = SmartFormValidations & {
  * Renders an input element based on the provided Zod schema and validation props.
  */
 const SmartInput = (props: SmartInputProps): ReactNode => {
+  const unwrap = (schema: SmartInputProps["schema"]) => {
+    if ("unwrap" in props.schema && typeof props.schema.unwrap === "function") {
+      return props.schema.unwrap() as SmartInputProps["schema"];
+    }
+    throw new Error(`Unable to unwrap schema of type: "${schema._zod.def.type}"`);
+  };
+
   switch (props.schema._zod.def.type) {
     case "default": {
-      if ("unwrap" in props.schema && typeof props.schema.unwrap === "function") {
-        return (
-          <SmartInput
-            {...props}
-            schema={props.schema.unwrap()}
-            placeholder={props.schema.parse(undefined) as string}
-          />
-        );
-      }
-      throw new Error('Unable to unwrap schema of type: "default"');
+      return (
+        <SmartInput
+          {...props}
+          schema={unwrap(props.schema)}
+          placeholder={props.schema.parse(undefined) as string}
+        />
+      );
     }
     case "string":
       return (
