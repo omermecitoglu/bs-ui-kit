@@ -93,7 +93,7 @@ const SmartForm = <
   schema,
   defaultValues,
   properties,
-}: SmartFormProps<Shape, ShapeKeys, Input, Output>) => {
+}: SmartFormProps<Shape, ShapeKeys, Input, Output>): ReactNode => {
   const entries = Object.entries(properties as ArrayLike<PropertyDefinition<Shape, ShapeKeys>>);
   return (
     <>
