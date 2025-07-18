@@ -121,6 +121,13 @@ const BetterDatePicker = ({
 
   useOnClickOutside([popupRef, inputRef], close);
 
+  const formatOutput = (date: Date) => {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
+
   return (
     <Group id={name}>
       {label && <Label text={label} />}
@@ -131,7 +138,7 @@ const BetterDatePicker = ({
             name={name}
             messages={messages}
             {...props}
-            value={selectedDate.toISOString()}
+            value={formatOutput(selectedDate)}
             displayValue={formatDate(selectedDate.toISOString(), locale)}
             readOnly
             onFocus={() => setIsShowingPopup(true)}
@@ -141,7 +148,7 @@ const BetterDatePicker = ({
             ref={inputRef}
             name={name}
             {...props}
-            value={selectedDate.toISOString()}
+            value={formatOutput(selectedDate)}
             displayValue={formatDate(selectedDate.toISOString(), locale)}
             readOnly
             onFocus={() => setIsShowingPopup(true)}
