@@ -113,9 +113,9 @@
     "postbuild": "copyfiles -f src/styles/* dist/styles"
   },
   "peerDependencies": {
-    "@fortawesome/fontawesome-svg-core": "^6",
-    "@fortawesome/free-brands-svg-icons": "^6",
-    "@fortawesome/free-solid-svg-icons": "^6",
+    "@fortawesome/fontawesome-svg-core": "^6 || ^7",
+    "@fortawesome/free-brands-svg-icons": "^6 || ^7",
+    "@fortawesome/free-solid-svg-icons": "^6 || ^7",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "react-bootstrap": "^2",
     "react-bootstrap-typeahead": "^6",
