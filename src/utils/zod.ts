@@ -1,4 +1,4 @@
-import { type ZodIssue, ZodIssueCode } from "zod";
+import { type ZodIssue, ZodIssueCode } from "zod/v3";
 
 function handleZodIssue(issue: ZodIssue) {
   switch (issue.code) {
